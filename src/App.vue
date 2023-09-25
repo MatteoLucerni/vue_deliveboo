@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <div>
-    <h1 class="text-danger">DeliveBoo</h1>
+  <div class="container">
+    <RouterView />
   </div>
 </template>
 
