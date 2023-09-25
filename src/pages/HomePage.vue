@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 export default {
+    name: 'HomePage',
     components: {
 
     },
@@ -29,8 +30,18 @@ export default {
 <template>
     <h1>DeliveBoo</h1>
     <ul>
-        <li v-for="plate in plates">
-            {{ plate.name }}
+        <li v-for="plate in plates" class="card p-5  my-5">
+            <img class="w-25" :src="plate.image" :alt="plate.name">
+            <h1>{{ plate.name }}</h1>
+            <small>{{ plate.price }}</small>
+            <h6>{{ plate.ingredients }}</h6>
+            <p>{{ plate.description }}</p>
+
+            <div class="buttons">
+                <RouterLink class="btn btn-primary" :to="{ name: 'plate-detail', params: { id: plate.id } }">
+                    Details
+                </RouterLink>
+            </div>
         </li>
     </ul>
 </template>
