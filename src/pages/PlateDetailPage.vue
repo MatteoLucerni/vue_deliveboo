@@ -15,7 +15,9 @@ export default {
         getPlate() {
             axios.get(this.endpoint).then(res => {
                 this.plate = res.data
-            }).catch(err => console.error(err))
+            }).catch(err => {
+                this.$router.push({ name: 'not-found' })
+            })
         }
     },
     created() {
