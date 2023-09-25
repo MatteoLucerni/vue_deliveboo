@@ -15,7 +15,6 @@ export default {
         getPlate() {
             axios.get(this.endpoint).then(res => {
                 this.plate = res.data
-                console.log(this.plate)
             }).catch(err => console.error(err))
         }
     },
@@ -31,6 +30,8 @@ export default {
     <small>{{ plate.price }}</small>
     <h6>{{ plate.ingredients }}</h6>
     <p>{{ plate.description }}</p>
+
+    <button @click="$router.push({ name: 'home' })" class="btn btn-secondary mt-4">Go back to home</button>
 </template>
 
 <style scoped></style>
