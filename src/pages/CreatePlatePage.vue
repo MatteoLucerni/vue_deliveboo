@@ -1,6 +1,6 @@
 <script>
 
-const emptyForm = {
+const emptyPlate = {
   name: '',
   image: '',
   price: '',
@@ -27,6 +27,8 @@ export default {
 
       axios.post('http://127.0.0.1:8000/api/plates', this.plate).then(res => {
         console.log('Success', res.data)
+        this.plate = emptyPlate
+        this.$router.push({ name: 'home' })
       }).catch(err => console.error(err))
 
     },
@@ -52,6 +54,11 @@ export default {
           required>
       </div>
       <div class="mb-3">
+        <label for="plateIngredients" class="form-label">Plate Ingredients</label>
+        <textarea v-model.trim="plate.ingredients" class="form-control" id="plateIngredients"
+          placeholder="Plate Ingredients" required></textarea>
+      </div>
+      <div class="mb-3">
         <label for="plateDescription" class="form-label">Plate Description</label>
         <textarea v-model.trim="plate.description" class="form-control" id="plateDescription"
           placeholder="Plate Description" required></textarea>
@@ -62,4 +69,7 @@ export default {
       <button type="submit" class="btn btn-primary">Create Plate</button>
     </form>
   </div>
+  <RouterLink class="btn btn-secondary" :to="{ name: 'home' }">
+    Go back to home
+  </RouterLink>
 </template>
