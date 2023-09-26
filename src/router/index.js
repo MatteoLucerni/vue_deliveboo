@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import PlateDetailPage from '../pages/PlateDetailPage.vue';
 import CreatePlatePage from '../pages/CreatePlatePage.vue';
+import EditPlatePage from '../pages/EditPlatePage.vue';
 import NotFoundPage from '../pages/NotFoundPage.vue';
 
 // router
@@ -14,7 +15,12 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomePage },
     { path: '/plates/:id', name: 'plate-detail', component: PlateDetailPage },
-    { path: '/plates/create', name:'create-plate', component:CreatePlatePage},
+    {
+      path: '/plates/create',
+      name: 'create-plate',
+      component: CreatePlatePage,
+    },
+    { path: '/plates/:id/edit', name: 'edit-plate', component: EditPlatePage },
     { path: '/not-found', name: 'not-found', component: NotFoundPage },
     { path: '/:pathMatch(.*)*', redirect: '/not-found' },
   ],
