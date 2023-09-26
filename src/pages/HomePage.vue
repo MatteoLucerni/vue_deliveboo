@@ -29,6 +29,9 @@ export default {
 
 <template>
     <h1>DeliveBoo</h1>
+    <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
+        Create a new plate
+    </RouterLink>
     <ul>
         <li v-for="plate in plates" class="card p-5  my-5">
             <img class="w-25" :src="plate.image" :alt="plate.name">
