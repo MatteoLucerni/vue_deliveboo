@@ -27,6 +27,13 @@ export default {
             }).catch(err => console.error(err)).then(res => {
 
             })
+        },
+        confirmDelete(id) {
+            const hasConfirmed = confirm(
+                `Are you sure that you want to delete this plate?`
+            );
+
+            if (hasConfirmed) this.deletePlate(id);
         }
     },
     created() {
@@ -53,7 +60,7 @@ export default {
                 <RouterLink class="btn btn-success mx-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
                     Edit
                 </RouterLink>
-                <button @click="deletePlate(plate.id)" class="btn btn-danger">Delete</button>
+                <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
             </div>
         </li>
     </ul>
