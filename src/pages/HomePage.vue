@@ -52,6 +52,9 @@ export default {
                 <RouterLink class="btn btn-primary" :to="{ name: 'plate-detail', params: { id: plate.id } }">
                     Details
                 </RouterLink>
+                <RouterLink class="btn btn-success" :to="{ name: 'edit-plate', params: { id: plate.id } }">
+                    Edit
+                </RouterLink>
                 <button @click="deletePlate(plate.id)" class="btn btn-danger">Delete</button>
             </div>
         </li>
