@@ -19,6 +19,14 @@ export default {
             }).catch(err => console.error(err)).then(res => {
 
             })
+        },
+        deletePlate(id) {
+            axios.delete(this.endpoint + '/' + id).then(res => {
+                console.log('Deleted', res.data)
+                this.fetchPlates()
+            }).catch(err => console.error(err)).then(res => {
+
+            })
         }
     },
     created() {
@@ -44,6 +52,7 @@ export default {
                 <RouterLink class="btn btn-primary" :to="{ name: 'plate-detail', params: { id: plate.id } }">
                     Details
                 </RouterLink>
+                <button @click="deletePlate(plate.id)" class="btn btn-danger">Delete</button>
             </div>
         </li>
     </ul>
