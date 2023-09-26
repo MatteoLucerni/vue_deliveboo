@@ -45,14 +45,12 @@ export default {
             <img class="w-25" :src="plate.image" :alt="plate.name">
             <h1>{{ plate.name }}</h1>
             <small>{{ plate.price }}</small>
-            <h6>{{ plate.ingredients }}</h6>
-            <p>{{ plate.description }}</p>
 
             <div class="buttons">
                 <RouterLink class="btn btn-primary" :to="{ name: 'plate-detail', params: { id: plate.id } }">
                     Details
                 </RouterLink>
-                <RouterLink class="btn btn-success" :to="{ name: 'edit-plate', params: { id: plate.id } }">
+                <RouterLink class="btn btn-success mx-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
                     Edit
                 </RouterLink>
                 <button @click="deletePlate(plate.id)" class="btn btn-danger">Delete</button>
