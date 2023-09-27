@@ -42,6 +42,9 @@ export default {
         <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
             Create a new plate
         </RouterLink>
+        <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
+            Go to trash bin
+        </RouterLink>
         <ul class="list-group mt-4 py-5">
             <li v-for="plate in plates" class="list-group-item d-flex justify-content-between align-items-center py-2">
                 <div class="d-flex align-items-center">
