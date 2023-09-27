@@ -3,9 +3,7 @@
 </script>
 
 <template>
-  <div class="container">
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
 <style></style>
