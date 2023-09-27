@@ -68,18 +68,21 @@ export default {
 <template>
     <AppHeader />
     <div class="container">
+        <h1>Plates list</h1>
         <AppAlert :isOpen="showAlert" :type="alertType">
             <div v-if="successMessage">{{ successMessage }}</div>
             <ul v-if="hasErrors">
                 <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
             </ul>
         </AppAlert>
-        <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
-            Create a new plate
-        </RouterLink>
-        <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
-            Go to trash bin
-        </RouterLink>
+        <div class="buttons text-end">
+            <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
+                Create a new plate
+            </RouterLink>
+            <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
+                Go to trash bin
+            </RouterLink>
+        </div>
         <ul class="list-group mt-4 py-5">
             <li v-for="plate in plates"
                 class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
