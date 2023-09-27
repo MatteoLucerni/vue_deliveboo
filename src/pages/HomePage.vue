@@ -1,10 +1,12 @@
 <script>
 import axios from 'axios';
 import AppAlert from '../components/AppAlert.vue';
+import AppHeader from '../components/AppHeader.vue';
 export default {
     name: 'HomePage',
     components: {
-        AppAlert
+        AppAlert,
+        AppHeader
     },
     data() {
         return {
@@ -64,8 +66,8 @@ export default {
 </script>
 
 <template>
-    <div>
-        <h1 class="display-4">DeliveBoo</h1>
+    <AppHeader />
+    <div class="container">
         <AppAlert :isOpen="showAlert" :type="alertType">
             <div v-if="successMessage">{{ successMessage }}</div>
             <ul v-if="hasErrors">
