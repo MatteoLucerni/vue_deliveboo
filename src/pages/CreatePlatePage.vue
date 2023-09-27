@@ -43,6 +43,9 @@ export default {
           console.log('Success', res.data);
           this.plate = { ...emptyPlate }; // Reset the form
           this.successMessage = 'Plate created successfully'
+          const paramId = res.data.id
+          console.log(paramId)
+          this.$router.push({ path: `/plates/${paramId}` })
         })
         .catch(err => {
           if (err.response.status === 400) {
