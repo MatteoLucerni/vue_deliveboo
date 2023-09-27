@@ -1,6 +1,7 @@
 <script>
 import AppHeader from '../components/AppHeader.vue'
 export default {
+  emits: ['create', 'edit'],
   components: {
     AppHeader
   },
