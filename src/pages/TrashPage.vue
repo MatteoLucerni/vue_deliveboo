@@ -1,13 +1,27 @@
 <script>
 import axios from 'axios';
+import AppAlert from '../components/AppAlert.vue';
 export default {
     components: {
-
+        AppAlert
     },
     data() {
         return {
             trashedPlates: [],
-            endpoint: 'http://127.0.0.1:8000/api/plates'
+            endpoint: 'http://127.0.0.1:8000/api/plates',
+            errors: {},
+            successMessage: null
+        }
+    },
+    computed: {
+        hasErrors() {
+            return Object.keys(this.errors).length;
+        },
+        showAlert() {
+            return Boolean(this.hasErrors || this.successMessage);
+        },
+        alertType() {
+            return this.hasErrors ? 'danger' : 'success';
         }
     },
     methods: {
@@ -20,25 +34,69 @@ export default {
             axios.patch(`${this.endpoint}/trash/${id}/restore`).then((res) => {
                 console.log('Plate restored');
                 this.fetchTrashedPlates();
-            }).catch((err) => console.error(err));
+                this.successMessage = 'Plate restored successfully'
+            }).catch(err => {
+                if (err.response.status === 400) {
+                    const { errors } = err.response.data;
+                    const errorMessage = {};
+                    for (let field in errors) errorMessage[field] = errors[field][0];
+                    this.errors = errorMessage;
+                } else {
+                    console.error(err);
+                    this.errors = { network: 'Error!' }
+                }
+            });
         },
         restoreAllPlates() {
             axios.patch(`${this.endpoint}/trash/restore`).then((res) => {
                 console.log('All plates restored');
                 this.fetchTrashedPlates();
-            }).catch((err) => console.error(err));
+                this.successMessage = 'All plates restored successfully'
+            }).catch(err => {
+                if (err.response.status === 400) {
+                    const { errors } = err.response.data;
+                    const errorMessage = {};
+                    for (let field in errors) errorMessage[field] = errors[field][0];
+                    this.errors = errorMessage;
+                } else {
+                    console.error(err);
+                    this.errors = { network: 'Error!' }
+                }
+            });
         },
         deletePlate(id) {
             axios.delete(`${this.endpoint}/trash/${id}/drop`).then((res) => {
                 console.log('Deleted Plate');
                 this.fetchTrashedPlates();
-            }).catch((err) => console.error(err));
+                this.successMessage = 'Plate deleted successfully'
+            }).catch(err => {
+                if (err.response.status === 400) {
+                    const { errors } = err.response.data;
+                    const errorMessage = {};
+                    for (let field in errors) errorMessage[field] = errors[field][0];
+                    this.errors = errorMessage;
+                } else {
+                    console.error(err);
+                    this.errors = { network: 'Error!' }
+                }
+            });
         },
         deleteAllPlates() {
             axios.delete(`${this.endpoint}/trash/drop`).then((res) => {
                 console.log('Deleted All plates');
                 this.fetchTrashedPlates();
-            }).catch((err) => console.error(err));
+                this.successMessage = 'All plates deleted successfully'
+            }).catch(err => {
+                if (err.response.status === 400) {
+                    const { errors } = err.response.data;
+                    const errorMessage = {};
+                    for (let field in errors) errorMessage[field] = errors[field][0];
+                    this.errors = errorMessage;
+                } else {
+                    console.error(err);
+                    this.errors = { network: 'Error!' }
+                }
+            });
         },
         confirmDelete(id) {
             let hasConfirmed;
@@ -67,6 +125,12 @@ export default {
 
 <template>
     <h1 class="text-center">Trash</h1>
+    <AppAlert :isOpen="showAlert" :type="alertType">
+        <div v-if="successMessage">{{ successMessage }}</div>
+        <ul v-if="hasErrors">
+            <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
+        </ul>
+    </AppAlert>
     <button @click="confirmDelete(null)" class="btn btn-danger">Delete All</button>
     <button @click="restoreAllPlates()" class="btn btn-success">Restore All</button>
     <ul v-if="trashedPlates.length" class="my-5 px-0">

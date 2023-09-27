@@ -1,13 +1,29 @@
 <script>
 import axios from 'axios';
+import AppAlert from '../components/AppAlert.vue';
 export default {
     name: 'HomePage',
-    components: {},
+    components: {
+        AppAlert
+    },
     data() {
         return {
             plates: [],
             endpoint: 'http://127.0.0.1:8000/api/plates',
+            errors: {},
+            successMessage: null
         };
+    },
+    computed: {
+        hasErrors() {
+            return Object.keys(this.errors).length;
+        },
+        showAlert() {
+            return Boolean(this.hasErrors || this.successMessage);
+        },
+        alertType() {
+            return this.hasErrors ? 'danger' : 'success';
+        }
     },
     methods: {
         fetchPlates() {
@@ -20,11 +36,22 @@ export default {
             axios.delete(this.endpoint + '/' + id).then((res) => {
                 console.log('Deleted', res.data);
                 this.fetchPlates();
-            }).catch((err) => console.error(err)).then((res) => { });
+                this.successMessage = 'Plate moved to trash successfully'
+            }).catch(err => {
+                if (err.response.status === 400) {
+                    const { errors } = err.response.data;
+                    const errorMessage = {};
+                    for (let field in errors) errorMessage[field] = errors[field][0];
+                    this.errors = errorMessage;
+                } else {
+                    console.error(err);
+                    this.errors = { network: 'Error!' }
+                }
+            });
         },
         confirmDelete(id) {
             const hasConfirmed = confirm(
-                `Are you sure that you want to delete this plate?`
+                `Are you sure that you want to move to trash this plate?`
             );
 
             if (hasConfirmed) this.deletePlate(id);
@@ -39,6 +66,12 @@ export default {
 <template>
     <div>
         <h1 class="display-4">DeliveBoo</h1>
+        <AppAlert :isOpen="showAlert" :type="alertType">
+            <div v-if="successMessage">{{ successMessage }}</div>
+            <ul v-if="hasErrors">
+                <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
+            </ul>
+        </AppAlert>
         <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
             Create a new plate
         </RouterLink>
