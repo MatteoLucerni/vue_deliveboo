@@ -36,7 +36,7 @@ export default {
                 :alt="plate.name"><br>
             <div class="ms-3">
                 <h6>{{ plate.ingredients }}</h6>
-                <small class="text-success fw-bold ">{{ plate.price }}€</small>
+                <small class="text-success fw-bold ">{{ plate.price }} €</small>
                 <p>{{ plate.description }}</p>
             </div>
         </div>

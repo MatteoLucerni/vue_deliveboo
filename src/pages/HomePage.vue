@@ -69,14 +69,14 @@ export default {
     <AppHeader />
     <div class="pt-5">
         <div class="container">
-            <h1 class="text-center">Plates list</h1>
+            <h1 class="text-center pb-3">Plates list</h1>
             <AppAlert :isOpen="showAlert" :type="alertType">
                 <div v-if="successMessage">{{ successMessage }}</div>
                 <ul v-if="hasErrors">
                     <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                 </ul>
             </AppAlert>
-            <div class="buttons text-end">
+            <div class="buttons d-flex justify-content-between">
                 <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
                     Create a new plate
                 </RouterLink>
@@ -84,7 +84,7 @@ export default {
                     Go to trash bin
                 </RouterLink>
             </div>
-            <ul class="list-group mt-4 py-5">
+            <ul class="list-group py-5">
                 <li v-for="plate in plates"
                     class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                     <div class="d-flex align-items-center">
@@ -93,14 +93,14 @@ export default {
                             :alt="plate.name">
                         <div>
                             <h2 class="mb-2">{{ plate.name }}</h2>
-                            <p class="mb-0">{{ plate.price }}</p>
+                            <p class="mb-0 text-success fw-bold">{{ plate.price }} €</p>
                         </div>
                     </div>
                     <div class="d-flex">
                         <RouterLink class="btn btn-primary me-2" :to="{ name: 'plate-detail', params: { id: plate.id } }">
                             Details
                         </RouterLink>
-                        <RouterLink class="btn btn-success me-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
+                        <RouterLink class="btn btn-warning me-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
                             Edit
                         </RouterLink>
                         <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
