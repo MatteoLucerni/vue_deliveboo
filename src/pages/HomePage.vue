@@ -46,7 +46,8 @@ export default {
             Go to trash bin
         </RouterLink>
         <ul class="list-group mt-4 py-5">
-            <li v-for="plate in plates" class="list-group-item d-flex justify-content-between align-items-center py-2">
+            <li v-for="plate in plates"
+                class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
                 <div class="d-flex align-items-center">
                     <img class="w-25 me-3" :src="plate.image" :alt="plate.name">
                     <div>
