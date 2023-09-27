@@ -67,44 +67,53 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="container">
-        <h1>Plates list</h1>
-        <AppAlert :isOpen="showAlert" :type="alertType">
-            <div v-if="successMessage">{{ successMessage }}</div>
-            <ul v-if="hasErrors">
-                <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
-            </ul>
-        </AppAlert>
-        <div class="buttons text-end">
-            <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
-                Create a new plate
-            </RouterLink>
-            <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
-                Go to trash bin
-            </RouterLink>
-        </div>
-        <ul class="list-group mt-4 py-5">
-            <li v-for="plate in plates"
-                class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
-                <div class="d-flex align-items-center">
-                    <img class="w-25 me-3"
-                        :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                        :alt="plate.name">
-                    <div>
-                        <h2 class="mb-2">{{ plate.name }}</h2>
-                        <p class="mb-0">{{ plate.price }}</p>
+    <div class="bg-pink pt-5">
+        <div class="container">
+            <h1 class="text-center">Plates list</h1>
+            <AppAlert :isOpen="showAlert" :type="alertType">
+                <div v-if="successMessage">{{ successMessage }}</div>
+                <ul v-if="hasErrors">
+                    <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
+                </ul>
+            </AppAlert>
+            <div class="buttons text-end">
+                <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
+                    Create a new plate
+                </RouterLink>
+                <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
+                    Go to trash bin
+                </RouterLink>
+            </div>
+            <ul class="list-group mt-4 py-5">
+                <li v-for="plate in plates"
+                    class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
+                    <div class="d-flex align-items-center">
+                        <img class="w-25 me-3"
+                            :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                            :alt="plate.name">
+                        <div>
+                            <h2 class="mb-2">{{ plate.name }}</h2>
+                            <p class="mb-0">{{ plate.price }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex">
-                    <RouterLink class="btn btn-primary me-2" :to="{ name: 'plate-detail', params: { id: plate.id } }">
-                        Details
-                    </RouterLink>
-                    <RouterLink class="btn btn-success me-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
-                        Edit
-                    </RouterLink>
-                    <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
-                </div>
-            </li>
-        </ul>
+                    <div class="d-flex">
+                        <RouterLink class="btn btn-primary me-2" :to="{ name: 'plate-detail', params: { id: plate.id } }">
+                            Details
+                        </RouterLink>
+                        <RouterLink class="btn btn-success me-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
+                            Edit
+                        </RouterLink>
+                        <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
+
+<style scoped>
+.bg-pink {
+    background: rgb(142, 142, 142);
+    background: linear-gradient(0deg, rgba(142, 142, 142, 1) 0%, rgba(182, 182, 182, 1) 45%, rgba(245, 245, 245, 1) 100%);
+}
+</style>
