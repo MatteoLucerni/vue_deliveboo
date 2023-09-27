@@ -39,7 +39,7 @@ export default {
       axios.put('http://127.0.0.1:8000/api/plates/' + this.$route.params.id, plateData)
         .then((res) => {
           console.log('Success', res.data);
-          this.successMessage = 'Piatto modificato con successo'
+          this.successMessage = 'Plate edited successfully'
         })
         .catch(err => {
           if (err.response.status === 400) {
@@ -49,7 +49,7 @@ export default {
             this.errors = errorMessage;
           } else {
             console.error(err);
-            this.errors = { network: 'Si è verificato un errore!' }
+            this.errors = { network: 'Error!' }
           }
         });
     },

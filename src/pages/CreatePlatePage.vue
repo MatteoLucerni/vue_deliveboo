@@ -42,7 +42,7 @@ export default {
         .then((res) => {
           console.log('Success', res.data);
           this.plate = { ...emptyPlate }; // Reset the form
-          this.successMessage = 'Piatto creato con successo'
+          this.successMessage = 'Plate created successfully'
         })
         .catch(err => {
           if (err.response.status === 400) {
@@ -52,7 +52,7 @@ export default {
             this.errors = errorMessage;
           } else {
             console.error(err);
-            this.errors = { network: 'Si è verificato un errore!' }
+            this.errors = { network: 'Error' }
           }
         });
     },
