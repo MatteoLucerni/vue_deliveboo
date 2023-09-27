@@ -1,5 +1,9 @@
 <script>
+import AppHeader from '../components/AppHeader.vue'
 export default {
+  components: {
+    AppHeader
+  },
   props: {
     plate: Object, // Plate data
     mode: String, // 'create' or 'edit'
@@ -24,7 +28,8 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <AppHeader />
+  <div class="container mt-5">
     <form @submit.prevent="submitForm" class="needs-validation" novalidate>
       <!-- Plate Name -->
       <div class="mb-3">
@@ -62,9 +67,10 @@ export default {
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">{{ mode === 'create' ? 'Create Plate' : 'Edit Plate' }}</button>
+      <button type="submit" class="btn btn-success">{{ mode === 'create' ? 'Create Plate' : 'Edit Plate' }}</button>
     </form>
 
     <!-- Go back to home button -->
-  <RouterLink class="btn btn-secondary mt-3" :to="{ name: 'home' }">Go back to home</RouterLink>
-</div></template>
+    <RouterLink class="btn btn-secondary mt-3" :to="{ name: 'home' }">Go back to home</RouterLink>
+  </div>
+</template>

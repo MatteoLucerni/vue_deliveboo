@@ -67,7 +67,7 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="bg-pink pt-5">
+    <div class="pt-5">
         <div class="container">
             <h1 class="text-center">Plates list</h1>
             <AppAlert :isOpen="showAlert" :type="alertType">
@@ -86,7 +86,7 @@ export default {
             </div>
             <ul class="list-group mt-4 py-5">
                 <li v-for="plate in plates"
-                    class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
+                    class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                     <div class="d-flex align-items-center">
                         <img class="w-25 me-3"
                             :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
@@ -111,9 +111,4 @@ export default {
     </div>
 </template>
 
-<style scoped>
-.bg-pink {
-    background: rgb(142, 142, 142);
-    background: linear-gradient(0deg, rgba(142, 142, 142, 1) 0%, rgba(182, 182, 182, 1) 45%, rgba(245, 245, 245, 1) 100%);
-}
-</style>
+<style scoped></style>
