@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios';
 import AppAlert from '../components/AppAlert.vue';
+import AppHeader from '../components/AppHeader.vue';
 export default {
     components: {
-        AppAlert
+        AppAlert,
+        AppHeader
     },
     data() {
         return {
@@ -124,32 +126,37 @@ export default {
 </script>
 
 <template>
-    <h1 class="text-center">Trash</h1>
-    <AppAlert :isOpen="showAlert" :type="alertType">
-        <div v-if="successMessage">{{ successMessage }}</div>
-        <ul v-if="hasErrors">
-            <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
-        </ul>
-    </AppAlert>
-    <button @click="confirmDelete(null)" class="btn btn-danger">Delete All</button>
-    <button @click="restoreAllPlates()" class="btn btn-success">Restore All</button>
-    <ul v-if="trashedPlates.length" class="my-5 px-0">
-        <li v-for="plate in trashedPlates" class="list-group-item d-flex align-items-center p-4 border rounded">
-            <div class="d-flex align-items-center">
-                <img class="w-25 me-3" :src="plate.image" :alt="plate.name">
-                <div>
-                    <h2 class="mb-2">{{ plate.name }}</h2>
-                    <p class="mb-0">{{ plate.price }}</p>
+    <AppHeader />
+    <div class="container">
+        <h1 class="text-center mt-5">Trash</h1>
+        <AppAlert :isOpen="showAlert" :type="alertType">
+            <div v-if="successMessage">{{ successMessage }}</div>
+            <ul v-if="hasErrors">
+                <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
+            </ul>
+        </AppAlert>
+        <div class="buttons text-end">
+            <button @click="confirmDelete(null)" class="btn btn-danger">Delete All</button>
+            <button @click="restoreAllPlates()" class="btn btn-success ms-2">Restore All</button>
+        </div>
+        <ul v-if="trashedPlates.length" class="my-5 px-0">
+            <li v-for="plate in trashedPlates" class="list-group-item d-flex align-items-center p-4 border rounded">
+                <div class="d-flex align-items-center">
+                    <img class="w-25 me-3" :src="plate.image" :alt="plate.name">
+                    <div>
+                        <h2 class="mb-2">{{ plate.name }}</h2>
+                        <p class="mb-0">{{ plate.price }}</p>
+                    </div>
                 </div>
-            </div>
-            <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
-            <button @click="restorePlate(plate.id)" class="btn btn-success">Restore</button>
-        </li>
-    </ul>
-    <div v-else class="text-danger my-4 fw-bold fs-4">
-        Trash is empty
+                <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
+                <button @click="restorePlate(plate.id)" class="btn btn-success ms-2">Restore</button>
+            </li>
+        </ul>
+        <div v-else class="text-danger my-4 fw-bold fs-4">
+            Trash is empty
+        </div>
+        <button @click="$router.push({ name: 'home' })" class="btn btn-secondary">Go back to home</button>
     </div>
-    <button @click="$router.push({ name: 'home' })" class="btn btn-secondary">Go back to home</button>
 </template>
 
 <style scoped></style>
