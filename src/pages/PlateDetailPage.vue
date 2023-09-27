@@ -32,7 +32,8 @@ export default {
     <div class="container border rounded p-5 mt-5">
         <h1 class="mb-5 fw-bolder ">{{ plate.name }}</h1>
         <div class="d-flex">
-            <img class="w-25" :src="plate.image" :alt="plate.name"><br>
+            <img class="w-25" :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                :alt="plate.name"><br>
             <div class="ms-3">
                 <h6>{{ plate.ingredients }}</h6>
                 <small class="text-success fw-bold ">{{ plate.price }}€</small>
