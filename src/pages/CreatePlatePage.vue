@@ -62,12 +62,14 @@ export default {
 
 <template>
   <div>
-    <AppAlert :isOpen="showAlert" :type="alertType">
-      <div v-if="successMessage">{{ successMessage }}</div>
-      <ul v-if="hasErrors">
-        <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
-      </ul>
-    </AppAlert>
     <plate-form :plate="plate" mode="create" @create="createPlate" />
+    <div class="container">
+      <AppAlert :isOpen="showAlert" :type="alertType">
+        <div v-if="successMessage">{{ successMessage }}</div>
+        <ul v-if="hasErrors">
+          <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
+        </ul>
+      </AppAlert>
+    </div>
   </div>
 </template>
