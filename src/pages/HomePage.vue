@@ -49,7 +49,9 @@ export default {
             <li v-for="plate in plates"
                 class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2">
                 <div class="d-flex align-items-center">
-                    <img class="w-25 me-3" :src="plate.image" :alt="plate.name">
+                    <img class="w-25 me-3"
+                        :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                        :alt="plate.name">
                     <div>
                         <h2 class="mb-2">{{ plate.name }}</h2>
                         <p class="mb-0">{{ plate.price }}</p>
