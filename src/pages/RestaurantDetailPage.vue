@@ -35,9 +35,8 @@ export default {
             <img class="w-25" :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                 :alt="restaurant.name"><br>
             <div class="ms-3">
-                <h6>{{ restaurant.ingredients }}</h6>
-                <small class="text-success fw-bold ">{{ restaurant.price }} €</small>
-                <p>{{ restaurant.description }}</p>
+                <h6>{{ restaurant.address }}</h6>
+                <small class="text-success fw-bold ">{{ restaurant.vat_number }}</small>
             </div>
         </div>
 
