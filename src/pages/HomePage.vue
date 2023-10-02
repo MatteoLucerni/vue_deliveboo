@@ -73,7 +73,7 @@ export default {
                         <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                     </ul>
                 </AppAlert>
-                <div class="filter-container d-flex flex-column border p-4 rounded">
+                <div class="filter-container restaurant-card d-flex flex-column p-4">
                     <h5>Filter by type</h5> <br>
                     <div class="buttons d-flex flex-wrap">
                         <div v-for="rType in types"
@@ -87,7 +87,7 @@ export default {
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <button @click="sendFilter" class="btn btn-primary w-25">Filter</button>
+                        <button @click="sendFilter" class="button-main-db w-25">Filter</button>
                     </div>
                 </div>
                 <ul class="list-group py-5">
