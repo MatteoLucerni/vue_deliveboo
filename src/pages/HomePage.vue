@@ -108,7 +108,7 @@ export default {
                             </div>
                         </div>
                         <div class="d-flex">
-                            <RouterLink class="btn btn-primary"
+                            <RouterLink class="button-main-db"
                                 :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
                                 Details
                             </RouterLink>
