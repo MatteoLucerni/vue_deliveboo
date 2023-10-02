@@ -32,6 +32,7 @@ export default {
             axios.get(this.endpoint).then((res) => {
                 this.restaurants = res.data.restaurants;
                 console.log('done');
+                console.log(this.restaurants)
             }).catch((err) => console.error(err)).then((res) => { });
         }
     },
@@ -53,7 +54,7 @@ export default {
                 </ul>
             </AppAlert>
             <div class="buttons d-flex justify-content-between">
-                Filtri
+
             </div>
             <ul class="list-group py-5">
                 <li v-for="restaurant in restaurants"
@@ -64,6 +65,12 @@ export default {
                             :alt="restaurant.name">
                         <div>
                             <h2 class="mb-2">{{ restaurant.name }}</h2>
+                            <small>Types:</small>
+                            <ul>
+                                <li v-for="restaurantType in restaurant.types">
+                                    {{ restaurantType.name }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="d-flex">
