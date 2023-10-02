@@ -92,9 +92,9 @@ export default {
                 </div>
                 <ul class="list-group py-5">
                     <li v-for="restaurant in restaurants"
-                        class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2 bg-light">
+                        class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                         <div class="d-flex align-items-center">
-                            <img class="w-25 me-3"
+                            <img class="w-25 rounded-3 me-3"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
