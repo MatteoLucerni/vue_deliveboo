@@ -11,6 +11,7 @@ export default {
     data() {
         return {
             restaurants: [],
+            types: [],
             endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
             successMessage: null
@@ -31,8 +32,9 @@ export default {
         fetchrestaurants() {
             axios.get(this.endpoint).then((res) => {
                 this.restaurants = res.data.restaurants;
+                this.types = res.data.types;
                 console.log('done');
-                console.log(this.restaurants)
+                console.log(this.types)
             }).catch((err) => console.error(err)).then((res) => { });
         }
     },
@@ -53,8 +55,14 @@ export default {
                     <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                 </ul>
             </AppAlert>
+            <h5>Filter by type</h5> <br>
             <div class="buttons d-flex justify-content-between">
-
+                <div v-for="rType in types" class="form-check" :key="rType.id">
+                    <input class="form-check-input" type="checkbox" :name="rType.name" :id="rType.name">
+                    <label class="form-check-label" :for="rType.name">
+                        {{ rType.name }}
+                    </label>
+                </div>
             </div>
             <ul class="list-group py-5">
                 <li v-for="restaurant in restaurants"
@@ -67,8 +75,8 @@ export default {
                             <h2 class="mb-2">{{ restaurant.name }}</h2>
                             <small>Types:</small>
                             <ul>
-                                <li v-for="restaurantType in restaurant.types">
-                                    {{ restaurantType.name }}
+                                <li v-for="rType in restaurant.types" :key="restaurant.id">
+                                    {{ rType.name }}
                                 </li>
                             </ul>
                         </div>
