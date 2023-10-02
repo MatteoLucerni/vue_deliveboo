@@ -55,13 +55,20 @@ export default {
                     <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                 </ul>
             </AppAlert>
-            <h5>Filter by type</h5> <br>
-            <div class="buttons d-flex justify-content-between">
-                <div v-for="rType in types" class="form-check" :key="rType.id">
-                    <input class="form-check-input" type="checkbox" :name="rType.name" :id="rType.name">
-                    <label class="form-check-label" :for="rType.name">
-                        {{ rType.name }}
-                    </label>
+            <div class="filter-container d-flex flex-column border p-4 rounded">
+                <h5>Filter by type</h5> <br>
+                <div class="buttons d-flex flex-wrap">
+                    <div v-for="rType in types"
+                        class="form-check mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3"
+                        :key="rType.id">
+                        <input class="form-check-input ms-2" type="checkbox" :name="rType.name" :id="rType.name">
+                        <label class="form-check-label ms-2" :for="rType.name">
+                            {{ rType.name }}
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary w-25">Filter</button>
                 </div>
             </div>
             <ul class="list-group py-5">
