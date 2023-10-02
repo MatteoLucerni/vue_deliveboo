@@ -101,7 +101,7 @@ export default {
                                 <h2 class="mb-2">{{ restaurant.name }}</h2>
                                 <small>Types:</small>
                                 <ul>
-                                    <li v-for="rType in restaurant.types" :key="restaurant.name">
+                                    <li v-for="rType in restaurant.types">
                                         {{ rType.name }}
                                     </li>
                                 </ul>
