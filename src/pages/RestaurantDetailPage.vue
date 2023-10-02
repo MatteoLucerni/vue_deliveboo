@@ -33,10 +33,10 @@ export default {
     <AppLoader>
 
         <AppHeader />
-        <div class="container border rounded p-5 mt-5">
+        <div class="container restaurant-card p-5 mt-5">
             <h1 class="mb-5 fw-bolder ">{{ restaurant.name }}</h1>
             <div class="d-flex">
-                <img class="w-25"
+                <img class="w-25 rounded-4 "
                     :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                     :alt="restaurant.name"><br>
                 <div class="ms-3">
@@ -45,7 +45,7 @@ export default {
                 </div>
             </div>
 
-            <button @click="$router.push({ name: 'home' })" class="btn btn-secondary mt-4">Go back to home</button>
+            <button @click="$router.push({ name: 'home' })" class="button-main-db mt-4">Go back to home</button>
         </div>
     </AppLoader>
 </template>

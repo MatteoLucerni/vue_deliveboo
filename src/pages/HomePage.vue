@@ -73,7 +73,7 @@ export default {
                         <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                     </ul>
                 </AppAlert>
-                <div class="filter-container d-flex flex-column border p-4 rounded">
+                <div class="filter-container restaurant-card d-flex flex-column p-4">
                     <h5>Filter by type</h5> <br>
                     <div class="buttons d-flex flex-wrap">
                         <div v-for="rType in types"
@@ -87,14 +87,14 @@ export default {
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <button @click="sendFilter" class="btn btn-primary w-25">Filter</button>
+                        <button @click="sendFilter" class="button-main-db w-25">Filter</button>
                     </div>
                 </div>
                 <ul class="list-group py-5">
                     <li v-for="restaurant in restaurants"
-                        class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2 bg-light">
+                        class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                         <div class="d-flex align-items-center">
-                            <img class="w-25 me-3"
+                            <img class="w-25 rounded-3 me-3"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
@@ -108,7 +108,7 @@ export default {
                             </div>
                         </div>
                         <div class="d-flex">
-                            <RouterLink class="btn btn-primary"
+                            <RouterLink class="button-main-db"
                                 :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
                                 Details
                             </RouterLink>
