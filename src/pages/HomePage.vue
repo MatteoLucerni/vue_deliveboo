@@ -14,7 +14,8 @@ export default {
             types: [],
             endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
-            successMessage: null
+            successMessage: null,
+            selectedFilters: []
         };
     },
     computed: {
@@ -35,6 +36,20 @@ export default {
                 this.types = res.data.types;
                 console.log('done');
                 console.log(this.types)
+            }).catch((err) => console.error(err)).then((res) => { });
+        },
+        sendFilter() {
+            console.log('ciao');
+
+            const filter = {
+                filter: this.selectedFilters
+            }
+
+            axios.get(this.endpoint, { params: filter }).then((res) => {
+                this.restaurants = res.data.restaurants;
+                console.log('filtered');
+                console.log(this.restaurants);
+                console.log(filter)
             }).catch((err) => console.error(err)).then((res) => { });
         }
     },
@@ -61,14 +76,15 @@ export default {
                     <div v-for="rType in types"
                         class="form-check mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3"
                         :key="rType.id">
-                        <input class="form-check-input ms-2" type="checkbox" :name="rType.name" :id="rType.name">
+                        <input v-model="selectedFilters" :value="rType.name" class="form-check-input ms-2" type="checkbox"
+                            :id="rType.name">
                         <label class="form-check-label ms-2" :for="rType.name">
                             {{ rType.name }}
                         </label>
                     </div>
                 </div>
                 <div class="text-center mt-4">
-                    <button class="btn btn-primary w-25">Filter</button>
+                    <button @click="sendFilter" class="btn btn-primary w-25">Filter</button>
                 </div>
             </div>
             <ul class="list-group py-5">
