@@ -10,8 +10,8 @@ export default {
     },
     data() {
         return {
-            plates: [],
-            endpoint: 'http://127.0.0.1:8000/api/plates',
+            restaurants: [],
+            endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
             successMessage: null
         };
@@ -28,39 +28,15 @@ export default {
         }
     },
     methods: {
-        fetchPlates() {
+        fetchrestaurants() {
             axios.get(this.endpoint).then((res) => {
-                this.plates = res.data.plates;
+                this.restaurants = res.data.restaurants;
                 console.log('done');
             }).catch((err) => console.error(err)).then((res) => { });
-        },
-        deletePlate(id) {
-            axios.delete(this.endpoint + '/' + id).then((res) => {
-                console.log('Deleted', res.data);
-                this.fetchPlates();
-                this.successMessage = 'Plate moved to trash successfully'
-            }).catch(err => {
-                if (err.response.status === 400) {
-                    const { errors } = err.response.data;
-                    const errorMessage = {};
-                    for (let field in errors) errorMessage[field] = errors[field][0];
-                    this.errors = errorMessage;
-                } else {
-                    console.error(err);
-                    this.errors = { network: 'Error!' }
-                }
-            });
-        },
-        confirmDelete(id) {
-            const hasConfirmed = confirm(
-                `Are you sure that you want to move to trash this plate?`
-            );
-
-            if (hasConfirmed) this.deletePlate(id);
-        },
+        }
     },
     created() {
-        this.fetchPlates();
+        this.fetchrestaurants();
     },
 };
 </script>
@@ -69,7 +45,7 @@ export default {
     <AppHeader />
     <div class="pt-5">
         <div class="container">
-            <h1 class="text-center pb-3">Plates list</h1>
+            <h1 class="text-center pb-3">Restaurants list</h1>
             <AppAlert :isOpen="showAlert" :type="alertType">
                 <div v-if="successMessage">{{ successMessage }}</div>
                 <ul v-if="hasErrors">
@@ -77,33 +53,20 @@ export default {
                 </ul>
             </AppAlert>
             <div class="buttons d-flex justify-content-between">
-                <RouterLink class="btn btn-success" :to="{ name: 'create-plate' }">
-                    Create a new plate
-                </RouterLink>
-                <RouterLink class="btn btn-secondary ms-2" :to="{ name: 'plates-trash' }">
-                    Go to trash bin
-                </RouterLink>
+                Filtri
             </div>
             <ul class="list-group py-5">
-                <li v-for="plate in plates"
+                <li v-for="restaurant in restaurants"
                     class="list-group-item border rounded d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                     <div class="d-flex align-items-center">
                         <img class="w-25 me-3"
-                            :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                            :alt="plate.name">
+                            :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                            :alt="restaurant.name">
                         <div>
-                            <h2 class="mb-2">{{ plate.name }}</h2>
-                            <p class="mb-0 text-success fw-bold">{{ plate.price }} €</p>
+                            <h2 class="mb-2">{{ restaurant.name }}</h2>
                         </div>
                     </div>
                     <div class="d-flex">
-                        <RouterLink class="btn btn-primary me-2" :to="{ name: 'plate-detail', params: { id: plate.id } }">
-                            Details
-                        </RouterLink>
-                        <RouterLink class="btn btn-warning me-2" :to="{ name: 'edit-plate', params: { id: plate.id } }">
-                            Edit
-                        </RouterLink>
-                        <button @click="confirmDelete(plate.id)" class="btn btn-danger">Delete</button>
                     </div>
                 </li>
             </ul>
