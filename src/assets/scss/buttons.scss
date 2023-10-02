@@ -1,10 +1,48 @@
 .button-main-db {
-  padding: 10px 20px;
+  padding: 15px 25px;
   border: 0;
   box-sizing: border-box;
   border-radius: 100000px;
   box-shadow: 0px 2px 8px #999898;
   background-color: $primary-color;
+  line-height: 16px;
+  outline: none;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    background-color: #f9a870;
+    transform: scale(1.05);
+  }
+
+  text-decoration: none;
+  color: inherit;
+}
+.button-danger-db {
+  padding: 15px 25px;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 100000px;
+  box-shadow: 0px 2px 8px #999898;
+  background-color: $danger-color;
+  line-height: 16px;
+  outline: none;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    background-color: #f9a870;
+    transform: scale(1.05);
+  }
+
+  text-decoration: none;
+  color: inherit;
+}
+.button-warning-db {
+  padding: 15px 25px;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 100000px;
+  box-shadow: 0px 2px 8px #999898;
+  background-color: $warning-color;
   line-height: 16px;
   outline: none;
   transition: background-color 0.3s, transform 0.3s;
