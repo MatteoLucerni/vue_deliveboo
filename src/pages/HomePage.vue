@@ -77,8 +77,8 @@ export default {
                     <h5 class="mb-3 text-center">Filter by type</h5>
                     <div class="row">
                         <div v-for="rType in types" class="col-6 mb-3" :key="rType.name">
-                            <div class="badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3">
-                                <input v-model="selectedFilters" :value="rType.name" class="form-check-input ms-2"
+                            <div class="d-flex align-items-center pb-2 pe-3">
+                                <input v-model="selectedFilters" :value="rType.name" class="checkbox-db ms-2"
                                     type="checkbox" :id="rType.name">
                                 <label class="form-check-label ms-2" :for="rType.name">{{ rType.name }}</label>
                             </div>
