@@ -17,7 +17,8 @@ export default {
             endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
             successMessage: null,
-            selectedFilters: []
+            selectedFilters: [],
+            keywordFilter: ''
         };
     },
     computed: {
@@ -36,24 +37,21 @@ export default {
             axios.get(this.endpoint).then((res) => {
                 this.restaurants = res.data.restaurants;
                 this.types = res.data.types;
-                console.log('done');
-                console.log(this.types)
             }).catch((err) => console.error(err)).then((res) => { });
         },
-        sendFilter() {
-            console.log('ciao');
+        sendFilters() {
+            const filters = {
+                filter: this.selectedFilters,
+                keyword: this.keywordFilter
+            };
 
-            const filter = {
-                filter: this.selectedFilters
-            }
-
-            axios.get(this.endpoint, { params: filter }).then((res) => {
-                this.restaurants = res.data.restaurants;
-                console.log('filtered');
-                console.log(this.restaurants);
-                console.log(filter)
-            }).catch((err) => console.error(err)).then((res) => { });
+            axios.get(this.endpoint, { params: filters })
+                .then((res) => {
+                    this.restaurants = res.data.restaurants;
+                })
+                .catch((err) => console.error(err))
         }
+
     },
     created() {
         this.fetchrestaurants();
@@ -73,8 +71,9 @@ export default {
                         <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                     </ul>
                 </AppAlert>
-                <!-- Filter by type -->
+                <!-- Filters -->
                 <div class="filter-container restaurant-card d-flex flex-column p-4">
+                    <!-- Filter by type -->
                     <h5>Filter by type</h5> <br>
                     <div class="buttons d-flex flex-wrap">
                         <div v-for="rType in types"
@@ -87,13 +86,17 @@ export default {
                             </label>
                         </div>
                     </div>
+                    <!-- Filter by keyword -->
+                    <h5 class="my-3">Search restaurant</h5>
+                    <input v-model="keywordFilter" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search">
                     <div class="text-center mt-4">
-                        <button @click="sendFilter" class="button-main-db w-25">Filter</button>
+                        <button @click="sendFilters()" class="button-main-db w-25">Filter</button>
                     </div>
                 </div>
                 <!-- List of restaurants -->
                 <ul class="list-group py-5">
-                    <li v-for="restaurant in restaurants"
+                    <li v-if="restaurants.length" v-for="restaurant in restaurants"
                         class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                         <div class="d-flex align-items-center">
                             <img class="w-25 rounded-3 me-3"
@@ -115,6 +118,9 @@ export default {
                                 Details
                             </RouterLink>
                         </div>
+                    </li>
+                    <li class="text-danger text-center list-unstyled " v-else>
+                        <h3>No restaurants, try changing filters</h3>
                     </li>
                 </ul>
             </div>
