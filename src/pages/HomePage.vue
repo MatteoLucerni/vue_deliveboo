@@ -94,7 +94,6 @@ export default {
                         <button @click="sendFilters()" class="button-main-db w-25">Filter</button>
                     </div>
                 </div>
-                <!-- List of restaurants -->
                 <ul class="list-group py-5">
                     <li v-if="restaurants.length" v-for="restaurant in restaurants"
                         class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
@@ -103,16 +102,14 @@ export default {
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
-                                <h2 class="mb-2">{{ restaurant.name }}</h2>
+                                <h2 class="mb-2 py-2">{{ restaurant.name }}</h2>
                                 <small>Types:</small>
                                 <ul>
-                                    <li v-for="rType in restaurant.types">
-                                        {{ rType.name }}
-                                    </li>
+                                    <li v-for="rType in restaurant.types">{{ rType.name }}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="d-flex">
+                        <div class="text-center mt-3 mb-3">
                             <RouterLink class="button-main-db"
                                 :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
                                 Details
@@ -126,6 +123,6 @@ export default {
             </div>
         </div>
     </AppLoader>
-</template>
+</template>  
 
 <style scoped></style>

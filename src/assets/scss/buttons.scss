@@ -55,3 +55,20 @@
   text-decoration: none;
   color: inherit;
 }
+
+
+input[type="checkbox"].checkbox-db {
+  border: 1px solid #f6884a;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px #f67c47;
+  color: #f6884a;
+  background-color: #ffffff;
+}
+
+/* Style the checkbox when checked using the same specific selector */
+input[type="checkbox"].checkbox-db:checked {
+  background-color: #f6884a;
+  color: #ffffff;
+}
+
