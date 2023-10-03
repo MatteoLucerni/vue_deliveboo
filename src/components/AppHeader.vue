@@ -43,3 +43,15 @@
         </div>
     </nav>
 </template>
+
+<style lang="scss" scoped>
+nav {
+    box-shadow: 11 11px 11px rgb(43, 43, 43);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: #ffebe3;
+}
+</style>
