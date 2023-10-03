@@ -35,31 +35,51 @@ export default {
     <AppLoader>
 
         <AppHeader />
-        <div class="container">
+        <div class="backgrund-color-page pt-3">
+            <div class="container">
 
-            <button @click="$router.push({ name: 'home' })" class="button-main-db mt-4 d-none d-md-block">Go back to
-                home</button>
-            <div class="restaurant-card p-3 mt-3">
-                <div class="row">
-                    <div class="col-sm">
-                        <h1 class="mb-4 fw-bolder text-center">{{ restaurant.name }}</h1>
-                    </div>
-                    <div class="col-sm">
-                        <img class="img-fluid rounded-4 mb-4"
-                            :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                            :alt="restaurant.name"><br>
-                    </div>
-                    <div class="col-sm">
-                        <h6>{{ restaurant.address }}</h6>
-                        <small class="text-success fw-bold ">{{ restaurant.vat_number }}</small>
+                <!-- *****TO DO FIX**** -->
+                <button @click="$router.push({ name: 'home' })" class="button-main-db mb-3 d-none d-md-block">Go back to
+                    home</button>
+                <!-- *******************-->
+
+                <div class="restaurant-card p-3">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h1 class="mb-4 fw-bolder text-center">{{ restaurant.name }}</h1>
+                        </div>
+                        <div class="col-sm">
+                            <img class="img-fluid rounded-4 mb-4"
+                                :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                                :alt="restaurant.name"><br>
+                        </div>
+                        <div class="col-sm">
+                            <h6>{{ restaurant.address }}</h6>
+
+                            <!-- *****Aggiungere cose del ristorante**** -->
+                            <small class="text-success fw-bold "></small>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="restaurant-card p-3 mt-3">
-                <h1 class="mb-4 fw-bolder text-center">Menù</h1>
-                <div class="row">
-                    <div v-for="plate in plates" :key="plate.id" class="restaurant-card p-3 mt-3 col-md-3 col-lg-2">
-                        <div>{{ plate.name }} {{ plate.category.name }} {{ plate.price }}</div>
+                <div class="restaurant-card mt-3 p-3">
+                    <h1 class="mb-4 fw-bolder text-center">Menù</h1>
+                    <div class="row g-3">
+                        <div v-for="plate in plates" :key="plate.id" class="col-6">
+                            <div class="restaurant-card h-100 p-3 plate-card">
+                                <div>
+                                    <img class="w-100 rounded-4 mb-4 h-fix"
+                                        :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                                        :alt="plate.name"><br>
+                                </div>
+                                <div>
+                                    <h6><strong>{{ plate.name }}</strong></h6>
+                                    <h6>{{ plate.price }} </h6>
+                                    <small class="text-success fw-bold ">{{ plate.category.name }}</small>
+                                    <p class="fw-bold ">{{ plate.ingredients }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,4 +87,17 @@ export default {
     </AppLoader>
 </template>
     
-<style scoped></style>
+<style scoped>
+.backgrund-color-page {
+    background-color: #ffebe3;
+}
+
+.plate-card {
+    background-color: #f6f6f6;
+}
+
+/* FIXARE DIMENSIONI IMMAGINE */
+.h-fix {
+    height: 120px;
+}
+</style>
