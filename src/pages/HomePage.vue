@@ -73,41 +73,36 @@ export default {
                         <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
                     </ul>
                 </AppAlert>
-                <div class="filter-container restaurant-card d-flex flex-column p-4">
-                    <h5>Filter by type</h5> <br>
-                    <div class="buttons d-flex flex-wrap">
-                        <div v-for="rType in types"
-                            class="form-check mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3"
-                            :key="rType.name">
-                            <input v-model="selectedFilters" :value="rType.name" class="form-check-input ms-2"
-                                type="checkbox" :id="rType.name">
-                            <label class="form-check-label ms-2" :for="rType.name">
-                                {{ rType.name }}
-                            </label>
+                <div class="filter-container restaurant-card p-4">
+                    <h5 class="mb-3 text-center">Filter by type</h5>
+                    <div class="row">
+                        <div v-for="rType in types" class="col-6 mb-3" :key="rType.name">
+                            <div class="badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3">
+                                <input v-model="selectedFilters" :value="rType.name" class="form-check-input ms-2"
+                                    type="checkbox" :id="rType.name">
+                                <label class="form-check-label ms-2" :for="rType.name">{{ rType.name }}</label>
+                            </div>
                         </div>
                     </div>
                     <div class="text-center mt-4">
-                        <button @click="sendFilter" class="button-main-db w-25">Filter</button>
+                        <button @click="sendFilter" class="button-main-db">Filter</button>
                     </div>
                 </div>
-                <ul class="list-group py-5">
-                    <li v-for="restaurant in restaurants"
-                        class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
-                        <div class="d-flex align-items-center">
-                            <img class="w-25 rounded-3 me-3"
+                <ul class="list-group py-4">
+                    <li v-for="restaurant in restaurants" class="restaurant-card p-4 my-3 bg-light">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="w-50 rounded-3 me-3"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
                                 <h2 class="mb-2">{{ restaurant.name }}</h2>
                                 <small>Types:</small>
                                 <ul>
-                                    <li v-for="rType in restaurant.types">
-                                        {{ rType.name }}
-                                    </li>
+                                    <li v-for="rType in restaurant.types">{{ rType.name }}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="d-flex">
+                        <div class="text-center mt-3">
                             <RouterLink class="button-main-db"
                                 :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
                                 Details
@@ -118,6 +113,6 @@ export default {
             </div>
         </div>
     </AppLoader>
-</template>
+</template>  
 
 <style scoped></style>
