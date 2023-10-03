@@ -88,10 +88,11 @@ export default {
                         <button @click="sendFilter" class="button-main-db">Filter</button>
                     </div>
                 </div>
-                <ul class="list-group py-4">
-                    <li v-for="restaurant in restaurants" class="restaurant-card p-3 my-3 bg-light">
-                        <div class="d-flex flex-column align-items-center mb-5">
-                            <img class="w-100 rounded-3 shadow"
+                <ul class="list-group py-5">
+                    <li v-for="restaurant in restaurants"
+                        class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
+                        <div class="d-flex align-items-center">
+                            <img class="w-25 rounded-3 me-3"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
