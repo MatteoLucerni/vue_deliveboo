@@ -55,13 +55,11 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class=" restaurant-card p-3 mt-3">
+            <div class="restaurant-card p-3 mt-3">
+                <h1 class="mb-4 fw-bolder text-center">Menù</h1>
                 <div class="row">
-                    <div class="col-sm">
-                        <h1 class="mb-4 fw-bolder text-center">Menù</h1>
-                    </div>
-                    <div v-for="plate in plates" :key="plate.id">
-                        <p class="text-center">{{ plate.name }} {{ plate.category.name }} {{ plate.price }}</p>
+                    <div v-for="plate in plates" :key="plate.id" class="restaurant-card p-3 mt-3 col-md-3 col-lg-2">
+                        <div>{{ plate.name }} {{ plate.category.name }} {{ plate.price }}</div>
                     </div>
                 </div>
             </div>
