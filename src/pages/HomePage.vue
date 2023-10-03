@@ -89,20 +89,20 @@ export default {
                     </div>
                 </div>
                 <ul class="list-group py-4">
-                    <li v-for="restaurant in restaurants" class="restaurant-card p-4 my-3 bg-light">
-                        <div class="d-flex align-items-center mb-5">
-                            <img class="w-50 rounded-3 me-3"
+                    <li v-for="restaurant in restaurants" class="restaurant-card p-3 my-3 bg-light">
+                        <div class="d-flex flex-column align-items-center mb-5">
+                            <img class="w-100 rounded-3 shadow"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                 :alt="restaurant.name">
                             <div>
-                                <h2 class="mb-2">{{ restaurant.name }}</h2>
+                                <h2 class="mb-2 py-2">{{ restaurant.name }}</h2>
                                 <small>Types:</small>
                                 <ul>
                                     <li v-for="rType in restaurant.types">{{ rType.name }}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="text-center mt-3">
+                        <div class="text-center mt-3 mb-3">
                             <RouterLink class="button-main-db"
                                 :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
                                 Details
