@@ -36,7 +36,7 @@ export default {
         }
     },
     methods: {
-        fetchrestaurants(endpoint = 'http://127.0.0.1:8000/api/restaurants',) {
+        fetchrestaurants(endpoint = 'http://127.0.0.1:8000/api/restaurants') {
             this.isLoading = true;
             axios.get(endpoint)
                 .then((res) => {
@@ -50,15 +50,18 @@ export default {
                 .then(() => { this.isLoading = false })
                 ;
         },
-        sendFilters() {
+        sendFilters(endpoint = 'http://127.0.0.1:8000/api/restaurants') {
             const filters = {
                 filter: this.selectedFilters,
                 keyword: this.keywordFilter
             };
 
-            axios.get(this.endpoint, { params: filters })
+            axios.get(endpoint, { params: filters })
                 .then((res) => {
-                    this.restaurants = res.data.restaurants;
+                    this.restaurants = {
+                        data: res.data.restaurants.data,
+                        links: res.data.restaurants.links
+                    }
                 })
                 .catch((err) => console.error(err))
         }
@@ -105,7 +108,8 @@ export default {
                 </div>
             </div>
             <ul class="list-group py-5">
-                <nav aria-label="Page navigation example">
+                <!-- Pagination -->
+                <nav v-if="restaurants.data.length" aria-label="Page navigation example">
                     <ul class="pagination justify-content-end mb-3">
                         <li class="page-item" v-for="link in restaurants.links"
                             :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
@@ -139,7 +143,8 @@ export default {
                     <h3>No restaurants, try changing filters</h3>
                 </li>
             </ul>
-            <nav aria-label="Page navigation example ">
+            <!-- Pagination -->
+            <nav v-if="restaurants.data.length" aria-label="Page navigation example ">
                 <ul class="pagination justify-content-end">
                     <li class="page-item" v-for="link in restaurants.links"
                         :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
