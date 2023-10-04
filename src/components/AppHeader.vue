@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-db py-3 shadow-sm">
+    <nav class="navbar navbar-expand-lg bg-body-db shadow-sm">
         <div class="container-fluid d-flex align-items-center ">
             <a class="navbar-brand d-flex align-items-center " href="#">
                 <img src="../../public/Yummy_Food.svg" alt="Logo" width="50" height="50"
@@ -40,6 +40,6 @@ nav {
     left: 0;
     right: 0;
     z-index: 1;
-    background-color: #ffebe3;
+    background-color: #f6f6f6;
 }
 </style>
