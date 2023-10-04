@@ -7,3 +7,8 @@
 .redirect-icon {
   font-size: 0.8rem;
 }
+
+.page-link.active,
+.active > .page-link {
+  z-index: 0;
+}
