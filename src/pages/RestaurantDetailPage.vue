@@ -35,53 +35,87 @@ export default {
     <AppLoader>
 
         <AppHeader />
-        <div class="backgrund-color-page pt-3">
+        <div class="backgrund-color-page py-3">
             <div class="container">
 
-                <!-- *****TO DO FIX**** -->
-                <button @click="$router.push({ name: 'home' })" class="button-main-db mb-3 d-none d-md-block">Go back to
-                    home</button>
-                <!-- *******************-->
+                <!-- BACK BUTTON -->
+                <button @click="$router.push({ name: 'home' })"
+                    class="button-main-db mt-2 mb-4 d-flex  justify-content-center align-items-center">
+                    <div>
+                        <strong><i class="fa-solid fa-arrow-left"></i></strong>
+                    </div>
+                    <div>
+                        <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
+                    </div>
+                </button>
 
+                <!-- RESTAURANT -->
                 <div class="restaurant-card p-3">
                     <div class="row">
-                        <div class="col-sm">
+
+                        <!-- restaurant name -->
+                        <div class="col-12">
                             <h1 class="mb-4 fw-bolder text-center">{{ restaurant.name }}</h1>
                         </div>
-                        <div class="col-sm">
-                            <img class="img-fluid rounded-4 mb-4"
+
+                        <!-- restaurant image -->
+                        <div class=" col-12 col-lg-6">
+                            <img class="rounded-4 mb-3 img-fluid ratio ratio-4x3"
                                 :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                                :alt="restaurant.name"><br>
+                                :alt="restaurant.name">
                         </div>
-                        <div class="col-sm">
-                            <h6>{{ restaurant.address }}</h6>
 
-                            <!-- *****Aggiungere cose del ristorante**** -->
-                            <small class="text-success fw-bold "></small>
-
+                        <!-- restaurant details -->
+                        <div class=" col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                            <div>
+                                <h5><strong>Address: </strong>{{ restaurant.address }}</h5>
+                                <h5 class="my-4"><strong>Phone: </strong>{{ restaurant.phone_number }}</h5>
+                                <h5><strong>Info:</strong></h5>
+                                <p><strong>{{ restaurant.description }}</strong></p>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-                <div class="restaurant-card mt-3 p-3">
+
+                <!-- MENU -->
+                <div class="restaurant-card my-4 p-3">
                     <h1 class="mb-4 fw-bolder text-center">Menù</h1>
                     <div class="row g-3">
-                        <div v-for="plate in plates" :key="plate.id" class="col-6">
+                        <div v-for="plate in plates" :key="plate.id" class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="restaurant-card h-100 p-3 plate-card">
-                                <div>
-                                    <img class="w-100 rounded-4 mb-4 h-fix"
+
+                                <!-- dish image -->
+                                <div class=" img-fluid ratio ratio-4x3  mb-4">
+                                    <img class="rounded-4"
                                         :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                                        :alt="plate.name"><br>
+                                        :alt="plate.name">
                                 </div>
+
+                                <!-- dish details -->
                                 <div>
-                                    <h6><strong>{{ plate.name }}</strong></h6>
-                                    <h6>{{ plate.price }} </h6>
+                                    <h5><strong>{{ plate.name }}</strong></h5>
+                                    <h5><strong>€ {{ plate.price }}</strong></h5>
                                     <small class="text-success fw-bold ">{{ plate.category.name }}</small>
-                                    <p class="fw-bold ">{{ plate.ingredients }}</p>
+                                    <div><strong>{{ plate.ingredients }}</strong></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- BACK BUTTON -->
+                <button @click="$router.push({ name: 'home' })"
+                    class="button-main-db mt-4 mb-2 d-flex  justify-content-center align-items-center">
+                    <div>
+                        <strong><i class="fa-solid fa-arrow-left"></i></strong>
+                    </div>
+                    <div>
+                        <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
+                    </div>
+                </button>
+
             </div>
         </div>
     </AppLoader>
@@ -94,10 +128,6 @@ export default {
 
 .plate-card {
     background-color: #f6f6f6;
-}
 
-/* FIXARE DIMENSIONI IMMAGINE */
-.h-fix {
-    height: 120px;
 }
 </style>
