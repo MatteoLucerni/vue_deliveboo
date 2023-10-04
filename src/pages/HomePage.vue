@@ -20,9 +20,9 @@ export default {
             successMessage: null,
             selectedFilters: [],
             keywordFilter: '',
-            showAllTypes: false,
         };
     },
+    showAllTypes: false,
     computed: {
         hasErrors() {
             return Object.keys(this.errors).length;
@@ -38,29 +38,36 @@ export default {
         },
     },
     methods: {
-        fetchrestaurants() {
-            axios
-                .get(this.endpoint)
+        fetchrestaurants(endpoint = 'http://127.0.0.1:8000/api/restaurants') {
+            this.isLoading = true;
+            axios.get(endpoint)
                 .then((res) => {
-                    this.restaurants = res.data.restaurants;
+                    this.restaurants = {
+                        data: res.data.restaurants.data,
+                        links: res.data.restaurants.links
+                    }
                     this.types = res.data.types;
                 })
-                .catch((err) => console.error(err))
-                .then((res) => { });
+                .catch((err) => console.error(err)).then((res) => { })
+                .then(() => { this.isLoading = false })
+                ;
         },
-        sendFilters() {
+        sendFilters(endpoint = 'http://127.0.0.1:8000/api/restaurants') {
             const filters = {
                 filter: this.selectedFilters,
-                keyword: this.keywordFilter,
+                keyword: this.keywordFilter
             };
 
-            axios
-                .get(this.endpoint, { params: filters })
+            axios.get(endpoint, { params: filters })
                 .then((res) => {
-                    this.restaurants = res.data.restaurants;
+                    this.restaurants = {
+                        data: res.data.restaurants.data,
+                        links: res.data.restaurants.links
+                    }
                 })
-                .catch((err) => console.error(err));
-        },
+                .catch((err) => console.error(err))
+        }
+
     },
     created() {
         this.fetchrestaurants();
