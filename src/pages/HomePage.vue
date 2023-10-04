@@ -83,13 +83,6 @@ export default {
     <div class="pt-5">
         <div class="container">
             <h1 class="text-center pb-3">Restaurants list</h1>
-            <AppAlert :isOpen="showAlert" :type="alertType">
-                <div v-if="successMessage">{{ successMessage }}</div>
-                <ul v-if="hasErrors">
-                    <li v-for="(error, field) in errors" :key="field">{{ error }}</li>
-                </ul>
-            </AppAlert>
-
             <!-- Filters -->
             <div class="filter-container restaurant-card d-flex flex-column p-4 mb-5">
                 <!-- Filter by type -->
