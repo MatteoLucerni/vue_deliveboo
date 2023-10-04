@@ -130,8 +130,18 @@ export default {
             <div class="card-layout">
                 <!-- Restaurant Cards -->
                 <div class="container pt-5">
+                    <!-- Pagination -->
+                    <nav v-if="restaurants.data.length" aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end mb-3">
+                            <li class="page-item" v-for="link in restaurants.links"
+                                :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
+                                <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
+                                    @click="fetchrestaurants(link.url)"></button>
+                            </li>
+                        </ul>
+                    </nav>
                     <div class="row">
-                        <div v-if="restaurants.length" v-for="restaurant in restaurants"
+                        <div v-if="restaurants.data.length" v-for="restaurant in restaurants"
                             class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
                             <div class="restaurant-card d-flex flex-column p-4 bg-light h-100">
                                 <!-- Set a fixed aspect ratio for the images -->
@@ -158,6 +168,16 @@ export default {
                             <h3>No restaurants, try changing filters</h3>
                         </li>
                     </div>
+                    <!-- Pagination -->
+                    <nav v-if="restaurants.data.length" aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end mb-3">
+                            <li class="page-item" v-for="link in restaurants.links"
+                                :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
+                                <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
+                                    @click="fetchrestaurants(link.url)"></button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
