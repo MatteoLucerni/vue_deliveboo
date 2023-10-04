@@ -12,3 +12,7 @@
 .active > .page-link {
   z-index: 0;
 }
+
+.page-item:last-child .page-link {
+  z-index: 0;
+}
