@@ -130,7 +130,7 @@ export default {
             <!-- Restaurant Cards -->
             <div class="container pt-5">
                 <div class="row">
-                    <div v-if="restaurants.data.length" v-for="restaurant in restaurants"
+                    <div v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
                         class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
                         <div class="restaurant-card d-flex flex-column p-4 bg-light h-100">
                             <!-- Set a fixed aspect ratio for the images -->
