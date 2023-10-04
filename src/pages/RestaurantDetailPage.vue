@@ -13,16 +13,18 @@ export default {
             endpoint: 'http://127.0.0.1:8000/api/restaurants/' + this.$route.params.id,
             restaurant: {},
             plates: {},
+            isLoading: false
         }
     },
     methods: {
         getRestaurant() {
+            this.isLoading = true
             axios.get(this.endpoint).then(res => {
                 this.restaurant = res.data.restaurant,
                     this.plates = res.data.plates
             }).catch(err => {
                 this.$router.push({ name: 'not-found' })
-            })
+            }).then(() => { this.isLoading = false })
         }
     },
     created() {
@@ -33,7 +35,6 @@ export default {
 
 <template>
     <AppLoader>
-
         <AppHeader />
         <div class="backgrund-color-page py-3">
             <div class="container">
@@ -118,7 +119,8 @@ export default {
 
             </div>
         </div>
-    </AppLoader>
+    </div>
+    <AppLoader v-if="isLoading" />
 </template>
     
 <style scoped>

@@ -1,43 +1,29 @@
 <script>
 export default {
-    data() {
-        return {
-            isLoading: true, // Inizialmente mostriamo il loader
-        };
-    },
-    methods: {
-        // Chiamato quando il contenuto dell'applicazione è stato caricato completamente
-        contentLoaded() {
-            this.isLoading = false; // Nascondiamo il loader
-        },
-    },
-    mounted() {
-        // Simuliamo un caricamento fittizio con un timeout di 3 secondi
-        setTimeout(this.contentLoaded, 2000);
-    },
 };
 </script>
 
 <template>
-    <div class="app-loader" v-if="isLoading">
+    <div class="app-loader">
         <div class="heart-loader">
             <div>
                 <img class="heart" src="../../public/Yummy_Food.svg" alt="">
             </div>
         </div>
     </div>
-    <div v-else>
-        <!-- Contenuto dell'applicazione -->
-        <slot></slot>
-    </div>
 </template>
   
 <style>
 .app-loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    z-index: 3;
     background-color: #F68949;
 }
 
