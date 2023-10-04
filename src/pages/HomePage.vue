@@ -163,7 +163,7 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <li class="text-danger text-center col-12" v-else>
+                    <li class="text-danger text-center col-12 pb-5" v-else>
                         <h3>No restaurants, try changing filters</h3>
                     </li>
                     <!-- Pagination -->
