@@ -16,3 +16,11 @@
 .page-item:last-child .page-link {
   z-index: 0;
 }
+
+ul,
+ol,
+li {
+  list-style: none;
+  padding: 0, 3px;
+  margin: 0;
+}
