@@ -12,14 +12,16 @@ export default {
     },
     data() {
         return {
-            restaurants: [],
+            restaurants: {
+                data: [],
+                links: []
+            },
             types: [],
-            endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
             successMessage: null,
             selectedFilters: [],
             keywordFilter: '',
-            isLoading: false
+            isLoading: false,
         };
     },
     computed: {
@@ -34,11 +36,14 @@ export default {
         }
     },
     methods: {
-        fetchrestaurants() {
+        fetchrestaurants(endpoint = 'http://127.0.0.1:8000/api/restaurants',) {
             this.isLoading = true;
-            axios.get(this.endpoint)
+            axios.get(endpoint)
                 .then((res) => {
-                    this.restaurants = res.data.restaurants;
+                    this.restaurants = {
+                        data: res.data.restaurants.data,
+                        links: res.data.restaurants.links
+                    }
                     this.types = res.data.types;
                 })
                 .catch((err) => console.error(err)).then((res) => { })
@@ -100,7 +105,16 @@ export default {
                 </div>
             </div>
             <ul class="list-group py-5">
-                <li v-if="restaurants.length" v-for="restaurant in restaurants"
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end mb-3">
+                        <li class="page-item" v-for="link in restaurants.links"
+                            :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
+                            <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
+                                @click="fetchrestaurants(link.url)"></button>
+                        </li>
+                    </ul>
+                </nav>
+                <li v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
                     class="restaurant-card d-flex justify-content-between align-items-center p-4 my-2 bg-light">
                     <div class="d-flex align-items-center">
                         <img class="restaurant-image rounded-3 me-3"
@@ -125,6 +139,15 @@ export default {
                     <h3>No restaurants, try changing filters</h3>
                 </li>
             </ul>
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item" v-for="link in restaurants.links"
+                        :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
+                        <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
+                            @click="fetchrestaurants(link.url)"></button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
     <AppLoader v-if="isLoading" />
