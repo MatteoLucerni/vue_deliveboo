@@ -13,16 +13,19 @@ export default {
     },
     data() {
         return {
-            restaurants: [],
+            restaurants: {
+                data: [],
+                links: []
+            },
             types: [],
-            endpoint: 'http://127.0.0.1:8000/api/restaurants',
             errors: {},
             successMessage: null,
             selectedFilters: [],
             keywordFilter: '',
+            isLoading: false,
+            showAllTypes: false,
         };
     },
-    showAllTypes: false,
     computed: {
         hasErrors() {
             return Object.keys(this.errors).length;
