@@ -12,7 +12,7 @@ export default {
         return {
             endpoint: 'http://127.0.0.1:8000/api/restaurants/' + this.$route.params.id,
             restaurant: {},
-            plates: {},
+            plates: [],
             isLoading: false,
             storage_path: 'http://127.0.0.1:8000/storage/',
             cartItems: []
@@ -22,8 +22,8 @@ export default {
         getRestaurant() {
             this.isLoading = true
             axios.get(this.endpoint).then(res => {
-                this.restaurant = res.data.restaurant,
-                    this.plates = res.data.plates
+                this.restaurant = res.data.restaurant
+                this.plates = res.data.restaurant.plates
             }).catch(err => {
                 this.$router.push({ name: 'not-found' })
             }).then(() => { this.isLoading = false })
@@ -106,7 +106,8 @@ export default {
             <div class="restaurant-card my-4 p-3">
                 <h1 class="mb-4 fw-bolder text-center">Menù</h1>
                 <div class="row g-3">
-                    <div v-for="plate in plates" :key="plate.id" class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div v-if="plates.length" v-for="plate in plates" :key="plate.id"
+                        class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="restaurant-card h-100 p-3 plate-card">
 
                             <!-- dish image -->
@@ -127,6 +128,7 @@ export default {
 
                         </div>
                     </div>
+                    <div class="text-danger text-center fs-2" v-else>No dishes available</div>
                 </div>
             </div>
 
