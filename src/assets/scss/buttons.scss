@@ -17,6 +17,21 @@
   text-decoration: none;
   color: inherit;
 }
+
+.button-cart-db {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.545); 
+  border: 1px solid #ccc; 
+  transition: background-color 0.3s, transform 0.3s;
+  display: none;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.9); 
+  }
+}
+
+
 .button-danger-db {
   padding: 15px 25px;
   border: 0;
