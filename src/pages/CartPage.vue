@@ -36,6 +36,8 @@ export default {
                 totalPrice = totalPrice + (item.price * item.quantity)
             });
 
+            totalPrice = totalPrice.toFixed(2)
+
             return totalPrice
         }
     },
