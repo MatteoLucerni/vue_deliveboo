@@ -75,7 +75,7 @@ export default {
                     </li>
                 </ul>
                 <div class="my-3">Totale ordine: {{ totalPrice }} €</div>
-                <RouterLink :to="{ name: 'order-form', params: { cartItems: cartItems } }" class="btn btn-success">Procede
+                <RouterLink :to="{ name: 'order-form' }" class="btn btn-success">Procede
                     to next step</RouterLink>
             </div>
             <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
