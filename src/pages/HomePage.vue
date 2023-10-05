@@ -24,6 +24,7 @@ export default {
             keywordFilter: '',
             isLoading: false,
             showAllTypes: false,
+            storage_path: 'http://127.0.0.1:8000/storage/'
         };
     },
     computed: {
@@ -127,50 +128,47 @@ export default {
                 <!-- Your layout card content here -->
             </div>
 
-            <div class="card-layout">
-                <!-- Restaurant Cards -->
-                <div class="container pt-5">
-                    <div class="row">
-                        <div v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
-                            class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
-                            <div class="restaurant-card d-flex flex-column p-4 bg-light h-100 justify-content-between">
-                                <!-- Set a fixed aspect ratio for the images -->
-                                <div class="image-fluid ratio ratio-4x3 mb-3">
-                                    <img class="rounded-3"
-                                        :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                                        :alt="restaurant.name">
-                                </div>
-                                <h2 class="mb-2">{{ restaurant.name }}</h2>
-                                <small>Types:</small>
-                                <ul class="py-1 pb-3">
-                                    <li v-for="rType in restaurant.types"><i class="fa-solid fa-bowl-food"></i> {{
-                                        rType.name }}
-                                    </li>
-                                </ul>
-                                <div class="text-center mt-3 mb-3">
-                                    <RouterLink class="button-main-db"
-                                        :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
-                                        Details
-                                    </RouterLink>
-                                </div>
+        <div class="card-layout">
+            <!-- Restaurant Cards -->
+            <div class="container pt-5">
+                <div class="row">
+                    <div v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
+                        class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
+                        <div class="restaurant-card d-flex flex-column p-4 bg-light h-100 justify-content-between">
+                            <!-- Set a fixed aspect ratio for the images -->
+                            <div class="image-fluid ratio ratio-4x3 mb-3">
+                                <img class="rounded-3" :src="storage_path + restaurant.image" :alt="restaurant.name">
                             </div>
-                        </div>
-                        <li class="text-danger text-center col-12 pb-5" v-else>
-                            <h3>No restaurants, try changing filters</h3>
-                        </li>
-                        <!-- Pagination -->
-                        <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
-                            <ul class="pagination justify-content-end mb-3">
-                                <li class="page-item" v-for="link in restaurants.links"
-                                    :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
-                                    <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
-                                        @click="fetchrestaurants(link.url)"></button>
+                            <h2 class="mb-2">{{ restaurant.name }}</h2>
+                            <small>Types:</small>
+                            <ul class="py-1 pb-3">
+                                <li v-for="rType in restaurant.types"><i class="fa-solid fa-bowl-food"></i> {{ rType.name }}
                                 </li>
                             </ul>
-                        </nav>
+                            <div class="text-center mt-3 mb-3">
+                                <RouterLink class="button-main-db"
+                                    :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">
+                                    Details
+                                </RouterLink>
+                            </div>
+                        </div>
                     </div>
+                    <li class="text-danger text-center col-12 pb-5" v-else>
+                        <h3>No restaurants, try changing filters</h3>
+                    </li>
+                    <!-- Pagination -->
+                    <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
+                        <ul class="pagination justify-content-end mb-3">
+                            <li class="page-item" v-for="link in restaurants.links"
+                                :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
+                                <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
+                                    @click="fetchrestaurants(link.url)"></button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
+        </div>
 
         </div>
         <AppLoader v-if="isLoading" />
