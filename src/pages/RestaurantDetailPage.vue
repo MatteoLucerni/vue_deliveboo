@@ -30,16 +30,25 @@ export default {
         },
         addToCart(itemToAdd) {
             const existingItemIndex = this.cartItems.findIndex(item => item.id === itemToAdd.id);
+            let checkPassed = true;
+            this.cartItems.forEach(item => {
+                if (item.restaurant_id != itemToAdd.restaurant_id) {
+                    checkPassed = false
+                }
+            });
 
-            if (existingItemIndex !== -1) {
-                // Se l'elemento esiste già nel carrello, incrementa la quantità
-                this.cartItems[existingItemIndex].quantity += 1;
+            if (checkPassed) {
+                if (existingItemIndex !== -1) {
+                    // Se l'elemento esiste già nel carrello, incrementa la quantità
+                    this.cartItems[existingItemIndex].quantity += 1;
+                } else {
+                    // Altrimenti, aggiungi un nuovo elemento con quantità 1
+                    this.cartItems.push({ ...itemToAdd, quantity: 1 });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
             } else {
-                // Altrimenti, aggiungi un nuovo elemento con quantità 1
-                this.cartItems.push({ ...itemToAdd, quantity: 1 });
+                alert('You cannot add plates from different restaurants!')
             }
-            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-
         },
         updateHeader() {
             this.$refs.header.updateCartCount()
