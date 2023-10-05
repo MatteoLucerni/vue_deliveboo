@@ -1,4 +1,5 @@
 <script>
+import { callWithAsyncErrorHandling } from 'vue';
 import AppHeader from '../components/AppHeader.vue'
 export default {
     components: {
@@ -17,17 +18,32 @@ export default {
         updateHeader() {
             this.$refs.header.updateCartCount()
         },
-        increaseQuantity(item) {
-            item.quantity++
+        changeQuantity(item, direction) {
+            if (direction === 'increase') {
+                item.quantity++;
+            } else if (direction === 'decrease' && item.quantity > 1) {
+                item.quantity--;
+            }
+
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-        },
-        decreseQuantity(item) {
-            item.quantity--
-            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+
+            this.updateHeader()
+        }
+
+    },
+    computed: {
+        totalPrice() {
+            let totalPrice = 0;
+            this.cartItems.forEach(item => {
+                totalPrice = totalPrice + (item.price * item.quantity)
+            });
+
+            totalPrice = totalPrice.toFixed(2)
+
+            return totalPrice
         }
     },
     created() {
-
         const storedItems = localStorage.getItem('cartItems');
 
         if (storedItems) {
@@ -49,15 +65,16 @@ export default {
                             {{ item.name }} - {{ item.price }} €
                             <span class="text-danger">
                                 <button class="btn border me-2" v-if="item.quantity > 1"
-                                    @click="decreseQuantity(item)">Less</button>
+                                    @click="changeQuantity(item, 'decrease')">Less</button>
                                 {{ item.quantity }}
-                                <button class="btn border ms-2" @click="increaseQuantity(item)">More</button>
+                                <button class="btn border ms-2" @click="changeQuantity(item, 'increase')">More</button>
                             </span>
                             <button class="btn btn-danger my-2"
                                 @click="removeItem(item.id), updateHeader()">Rimuovi</button>
                         </div>
                     </li>
                 </ul>
+                <div class="my-3">Totale ordine: {{ totalPrice }} €</div>
                 <RouterLink :to="{ name: 'order-form', params: { cartItems: cartItems } }" class="btn btn-success">Procede
                     to next step</RouterLink>
             </div>
