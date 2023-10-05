@@ -142,7 +142,7 @@ export default {
                 <div class="row">
                     <div v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
                         class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
-                        <div class="restaurant-card d-flex flex-column p-4 bg-light h-100">
+                        <div class="restaurant-card d-flex flex-column p-4 bg-light h-100 justify-content-between">
                             <!-- Set a fixed aspect ratio for the images -->
                             <div class="image-fluid ratio ratio-4x3 mb-3">
                                 <img class="rounded-3"
@@ -167,7 +167,7 @@ export default {
                         <h3>No restaurants, try changing filters</h3>
                     </li>
                     <!-- Pagination -->
-                    <nav v-if="restaurants.data.length" aria-label="Page navigation example">
+                    <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
                         <ul class="pagination justify-content-end mb-3">
                             <li class="page-item" v-for="link in restaurants.links"
                                 :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
