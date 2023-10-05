@@ -82,7 +82,6 @@ export default {
     <AppHeader />
     <div class="pt-5 background-color-page">
         <div class="container">
-            <h1 class="text-center pb-3">Restaurants list</h1>
             <AppAlert :isOpen="showAlert" :type="alertType">
                 <div v-if="successMessage">{{ successMessage }}</div>
                 <ul v-if="hasErrors">
@@ -91,7 +90,7 @@ export default {
             </AppAlert>
 
             <!-- Filters -->
-            <div class="filter-container restaurant-card d-flex flex-column p-4 mb-5">
+            <div class="filter-container filter-card d-flex flex-column p-4 mb-5">
                 <!-- Filter by type -->
                 <h5 class="text-center">Filter by type</h5>
                 <br>
@@ -129,16 +128,6 @@ export default {
         <div class="card-layout">
             <!-- Restaurant Cards -->
             <div class="container pt-5">
-                <!-- Pagination -->
-                <nav v-if="restaurants.data.length" aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end mb-3">
-                        <li class="page-item" v-for="link in restaurants.links"
-                            :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
-                            <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
-                                @click="fetchrestaurants(link.url)"></button>
-                        </li>
-                    </ul>
-                </nav>
                 <div class="row">
                     <div v-if="restaurants.data.length" v-for="restaurant in restaurants.data"
                         class="col-12 col-md-6 col-lg-3 mb-4" :key="restaurant.id">
@@ -184,8 +173,25 @@ export default {
     <AppLoader v-if="isLoading" />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .background-color-page {
-    background-color: #ffebe3;
+    background-size: 100% 100%;
+    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    background-image:
+        radial-gradient(18% 28% at 24% 50%, #F6884A 7%, #073AFF00 100%),
+        radial-gradient(18% 28% at 18% 71%, #FFA07A 6%, #073AFF00 100%),
+        radial-gradient(70% 53% at 36% 76%, #FF8C69 0%, #073AFF00 100%),
+        radial-gradient(42% 53% at 15% 94%, #FF7043 7%, #073AFF00 100%),
+        radial-gradient(42% 53% at 34% 72%, #FF6347 7%, #073AFF00 100%),
+        radial-gradient(18% 28% at 35% 87%, #FF5722 7%, #073AFF00 100%),
+        radial-gradient(31% 43% at 7% 98%, #ff5100 10%, #073AFF00 100%),
+        radial-gradient(21% 37% at 72% 23%, #FF8C00 10%, #073AFF00 100%),
+        radial-gradient(35% 56% at 91% 74%, #FFA07A 9%, #073AFF00 100%),
+        radial-gradient(74% 86% at 70% 55%, #F6884A 24%, #073AFF00 100%),
+        linear-gradient(135deg, #f9933a 0%, #fb6c41 30%, #fea750 30%, #fdcd80 40%, #ffa07a 40%, #ffa07a 50%, #ff8c69 50%, #ff8c69 60%, #ff7043 60%, #ff7043 70%, #ff5722 70%, #ff5722 80%, #ff4500 80%, #ff4500 100%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+
+
+
 }
 </style>
