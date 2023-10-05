@@ -39,6 +39,7 @@ export default {
                     <li v-for="item in cartItems" :key="item.id">
                         <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
                             {{ item.name }} - {{ item.price }} €
+                            <span class="text-danger">{{ item.quantity }}</span>
                             <button class="btn btn-danger my-2"
                                 @click="removeItem(item.id), updateHeader()">Rimuovi</button>
                         </div>

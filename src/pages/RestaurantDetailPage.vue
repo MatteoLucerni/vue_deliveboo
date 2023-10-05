@@ -28,9 +28,19 @@ export default {
                 this.$router.push({ name: 'not-found' })
             }).then(() => { this.isLoading = false })
         },
-        addToCart(item) {
-            this.cartItems.push(item);
+        addToCart(itemToAdd) {
+            console.log(itemToAdd);
+            const existingItemIndex = this.cartItems.findIndex(item => item.id === itemToAdd.id);
+
+            if (existingItemIndex !== -1) {
+                // Se l'elemento esiste già nel carrello, incrementa la quantità
+                this.cartItems[existingItemIndex].quantity += 1;
+            } else {
+                // Altrimenti, aggiungi un nuovo elemento con quantità 1
+                this.cartItems.push({ ...itemToAdd, quantity: 1 });
+            }
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+
         },
         updateHeader() {
             this.$refs.header.updateCartCount()
