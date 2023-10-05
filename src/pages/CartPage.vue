@@ -13,6 +13,9 @@ export default {
         removeItem(itemId) {
             this.cartItems = this.cartItems.filter(item => item.id !== itemId);
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        },
+        updateHeader() {
+            this.$refs.header.updateCartCount()
         }
     },
     created() {
@@ -27,7 +30,7 @@ export default {
 </script>
 
 <template>
-    <AppHeader />
+    <AppHeader ref="header" />
     <div class="background-color-page py-3">
         <div class="container">
             <div>
@@ -36,7 +39,8 @@ export default {
                     <li v-for="item in cartItems" :key="item.id">
                         <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
                             {{ item.name }} - {{ item.price }} €
-                            <button class="btn btn-danger my-2" @click="removeItem(item.id)">Rimuovi</button>
+                            <button class="btn btn-danger my-2"
+                                @click="removeItem(item.id), updateHeader()">Rimuovi</button>
                         </div>
                     </li>
                 </ul>
