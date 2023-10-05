@@ -18,14 +18,16 @@ export default {
         updateHeader() {
             this.$refs.header.updateCartCount()
         },
-        increaseQuantity(item) {
-            item.quantity++
-            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-        },
-        decreseQuantity(item) {
-            item.quantity--
+        changeQuantity(item, direction) {
+            if (direction === 'increase') {
+                item.quantity++;
+            } else if (direction === 'decrease' && item.quantity > 1) {
+                item.quantity--;
+            }
+
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
         }
+
     },
     computed: {
         totalPrice() {
@@ -61,9 +63,9 @@ export default {
                             {{ item.name }} - {{ item.price }} €
                             <span class="text-danger">
                                 <button class="btn border me-2" v-if="item.quantity > 1"
-                                    @click="decreseQuantity(item)">Less</button>
+                                    @click="changeQuantity(item, 'decrease')">Less</button>
                                 {{ item.quantity }}
-                                <button class="btn border ms-2" @click="increaseQuantity(item)">More</button>
+                                <button class="btn border ms-2" @click="changeQuantity(item, 'increase')">More</button>
                             </span>
                             <button class="btn btn-danger my-2"
                                 @click="removeItem(item.id), updateHeader()">Rimuovi</button>
