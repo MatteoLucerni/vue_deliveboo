@@ -36,7 +36,7 @@ export default {
 <template>
     <AppLoader v-if="isLoading" />
     <AppHeader />
-    <div class="backgrund-color-page py-3">
+    <div class="background-color-page py-3">
         <div class="container">
 
             <!-- BACK BUTTON -->
@@ -121,7 +121,7 @@ export default {
 </template>
     
 <style scoped>
-.backgrund-color-page {
+.background-color-page {
     background-color: #ffebe3;
 }
 
