@@ -34,7 +34,7 @@ export default {
                 <h2>Il tuo carrello:</h2>
                 <ul>
                     <li v-for="item in cartItems" :key="item.id">
-                        <div class="card px-5 d-flex flex-row align-items-center justify-content-between">
+                        <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
                             {{ item.name }} - {{ item.price }} €
                             <button class="btn btn-danger my-2" @click="removeItem(item.id)">Rimuovi</button>
                         </div>
