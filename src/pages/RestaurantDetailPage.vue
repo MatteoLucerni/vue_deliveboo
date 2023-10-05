@@ -31,6 +31,9 @@ export default {
         addToCart(item) {
             this.cartItems.push(item);
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        },
+        updateHeader() {
+            this.$refs.header.updateCartCount()
         }
     },
     created() {
@@ -47,7 +50,7 @@ export default {
 
 <template>
     <AppLoader v-if="isLoading" />
-    <AppHeader />
+    <AppHeader ref="header" />
     <div class="background-color-page py-3">
         <div class="container">
 
@@ -98,7 +101,8 @@ export default {
                         <div class="restaurant-card h-100 p-3 plate-card">
 
                             <!-- dish image -->
-                            <div @click="addToCart(plate)" class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
+                            <div @click="addToCart(plate), updateHeader()"
+                                class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
                                 <img class="rounded-4" :src="storage_path + plate.image" :alt="plate.name">
                                 <button class="button-cart-db rounded-4"><i
                                         class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>

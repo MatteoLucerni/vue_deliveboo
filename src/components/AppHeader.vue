@@ -6,6 +6,15 @@ export default {
             cartItems: [],
         }
     },
+    methods: {
+        updateCartCount() {
+            const storedItems = localStorage.getItem('cartItems');
+
+            if (storedItems) {
+                this.cartItems = JSON.parse(storedItems);
+            }
+        }
+    },
     created() {
 
         const storedItems = localStorage.getItem('cartItems');
