@@ -14,7 +14,8 @@ export default {
             restaurant: {},
             plates: {},
             isLoading: false,
-            storage_path: 'http://127.0.0.1:8000/storage/'
+            storage_path: 'http://127.0.0.1:8000/storage/',
+            cartItems: []
         }
     },
     methods: {
@@ -26,10 +27,20 @@ export default {
             }).catch(err => {
                 this.$router.push({ name: 'not-found' })
             }).then(() => { this.isLoading = false })
+        },
+        addToCart(item) {
+            this.cartItems.push(item);
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
         }
     },
     created() {
         this.getRestaurant()
+
+        const storedItems = localStorage.getItem('cartItems');
+
+        if (storedItems) {
+            this.cartItems = JSON.parse(storedItems);
+        }
     }
 }
 </script>
@@ -87,7 +98,7 @@ export default {
                         <div class="restaurant-card h-100 p-3 plate-card">
 
                             <!-- dish image -->
-                            <div class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
+                            <div @click="addToCart(plate)" class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
                                 <img class="rounded-4" :src="storage_path + plate.image" :alt="plate.name">
                                 <button class="button-cart-db rounded-4"><i
                                         class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>
