@@ -14,7 +14,8 @@ export default {
             restaurant: {},
             plates: {},
             isLoading: false,
-            storage_path: 'http://127.0.0.1:8000/storage/'
+            storage_path: 'http://127.0.0.1:8000/storage/',
+            cartItems: []
         }
     },
     methods: {
@@ -26,17 +27,39 @@ export default {
             }).catch(err => {
                 this.$router.push({ name: 'not-found' })
             }).then(() => { this.isLoading = false })
+        },
+        addToCart(itemToAdd) {
+            const existingItemIndex = this.cartItems.findIndex(item => item.id === itemToAdd.id);
+
+            if (existingItemIndex !== -1) {
+                // Se l'elemento esiste già nel carrello, incrementa la quantità
+                this.cartItems[existingItemIndex].quantity += 1;
+            } else {
+                // Altrimenti, aggiungi un nuovo elemento con quantità 1
+                this.cartItems.push({ ...itemToAdd, quantity: 1 });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+
+        },
+        updateHeader() {
+            this.$refs.header.updateCartCount()
         }
     },
     created() {
         this.getRestaurant()
+
+        const storedItems = localStorage.getItem('cartItems');
+
+        if (storedItems) {
+            this.cartItems = JSON.parse(storedItems);
+        }
     }
 }
 </script>
 
 <template>
     <AppLoader v-if="isLoading" />
-    <AppHeader />
+    <AppHeader ref="header" />
     <div class="background-color-page py-3">
         <div class="container">
 
@@ -87,7 +110,8 @@ export default {
                         <div class="restaurant-card h-100 p-3 plate-card">
 
                             <!-- dish image -->
-                            <div class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
+                            <div @click="addToCart(plate), updateHeader()"
+                                class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
                                 <img class="rounded-4" :src="storage_path + plate.image" :alt="plate.name">
                                 <button class="button-cart-db rounded-4"><i
                                         class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>

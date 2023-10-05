@@ -1,6 +1,29 @@
 <script>
 import { RouterLink } from 'vue-router';
+export default {
+    data() {
+        return {
+            cartItems: [],
+        }
+    },
+    methods: {
+        updateCartCount() {
+            const storedItems = localStorage.getItem('cartItems');
 
+            if (storedItems) {
+                this.cartItems = JSON.parse(storedItems);
+            }
+        }
+    },
+    created() {
+
+        const storedItems = localStorage.getItem('cartItems');
+
+        if (storedItems) {
+            this.cartItems = JSON.parse(storedItems);
+        }
+    },
+}
 </script>
 
 <template>
@@ -25,6 +48,7 @@ import { RouterLink } from 'vue-router';
                 </ul>
             </div>
             <div class="d-flex justify-content-end align-item-center">
+                <span class="text-dark me-2">{{ cartItems.length }}</span>
                 <RouterLink :to="{ name: 'cart' }"><i class="fa-solid fa-cart-shopping text-dark me-5 cart"></i>
                 </RouterLink>
             </div>

@@ -3,15 +3,63 @@ import AppHeader from '../components/AppHeader.vue'
 export default {
     components: {
         AppHeader
-    }
+    },
+    data() {
+        return {
+            cartItems: []
+        };
+    },
+    methods: {
+        removeItem(itemId) {
+            this.cartItems = this.cartItems.filter(item => item.id !== itemId);
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        },
+        updateHeader() {
+            this.$refs.header.updateCartCount()
+        },
+        increaseQuantity(item) {
+            item.quantity++
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        },
+        decreseQuantity(item) {
+            item.quantity--
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        }
+    },
+    created() {
+
+        const storedItems = localStorage.getItem('cartItems');
+
+        if (storedItems) {
+            this.cartItems = JSON.parse(storedItems);
+        }
+    },
 };
 </script>
 
 <template>
-    <AppHeader />
+    <AppHeader ref="header" />
     <div class="background-color-page py-3">
         <div class="container">
-            <h1>Cart Page</h1>
+            <div>
+                <h2>Il tuo carrello:</h2>
+                <ul class="list-unstyled">
+                    <li v-for="item in cartItems" :key="item.id">
+                        <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
+                            {{ item.name }} - {{ item.price }} €
+                            <span class="text-danger">
+                                <button class="btn border me-2" v-if="item.quantity > 1"
+                                    @click="decreseQuantity(item)">Less</button>
+                                {{ item.quantity }}
+                                <button class="btn border ms-2" @click="increaseQuantity(item)">More</button>
+                            </span>
+                            <button class="btn btn-danger my-2"
+                                @click="removeItem(item.id), updateHeader()">Rimuovi</button>
+                        </div>
+                    </li>
+                </ul>
+                <button class="btn btn-success">Procede to next step</button>
+            </div>
             <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
         </div>
     </div>
