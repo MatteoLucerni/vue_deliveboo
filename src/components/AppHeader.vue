@@ -40,6 +40,10 @@ nav {
     left: 0;
     right: 0;
     z-index: 1;
-    background-color: #f6f6f6;
+    background: rgba(212, 212, 212, 0.59);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(15.5px);
+    border: 1px solid rgba(212, 212, 212, 0.3);
 }
 </style>
