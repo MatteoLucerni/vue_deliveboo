@@ -98,8 +98,8 @@ export default {
                 <div class="buttons d-flex flex-wrap">
                     <div v-for="(rType, index) in filteredTypes" :key="rType.name"
                         :class="['form-check', index >= 4 && !showAllTypes ? 'd-none' : '', 'mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3 my-2']">
-                        <input v-model="selectedFilters" :value="rType.name" class="form-check-input ms-2" type="checkbox"
-                            :id="rType.name">
+                        <input @change="sendFilters()" v-model="selectedFilters" :value="rType.name"
+                            class="form-check-input ms-2" type="checkbox" :id="rType.name">
                         <label class="form-check-label ms-2" :for="rType.name">
                             {{ rType.name }}
                         </label>
