@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage.vue";
 import RestaurantDetailPage from "../pages/RestaurantDetailPage.vue";
 import NotFoundPage from "../pages/NotFoundPage.vue";
 import CartPage from "../pages/CartPage.vue";
+import OrderFormPage from "../pages/OrderFormPage.vue";
 
 // router
 const router = createRouter({
@@ -19,6 +20,7 @@ const router = createRouter({
       component: RestaurantDetailPage,
     },
     { path: "/cart", name: "cart", component: CartPage },
+    { path: "/order-form", name: "order-form", component: OrderFormPage },
     { path: "/not-found", name: "not-found", component: NotFoundPage },
     { path: "/:pathMatch(.*)*", redirect: "/not-found" },
   ],
