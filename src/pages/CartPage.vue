@@ -43,20 +43,22 @@ export default {
         <div class="container">
             <div>
                 <h2>Il tuo carrello:</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li v-for="item in cartItems" :key="item.id">
                         <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
                             {{ item.name }} - {{ item.price }} €
                             <span class="text-danger">
-                                <button v-if="item.quantity > 1" @click="decreseQuantity(item)">-</button>
+                                <button class="btn border me-2" v-if="item.quantity > 1"
+                                    @click="decreseQuantity(item)">Less</button>
                                 {{ item.quantity }}
-                                <button @click="increaseQuantity(item)">+</button>
+                                <button class="btn border ms-2" @click="increaseQuantity(item)">More</button>
                             </span>
                             <button class="btn btn-danger my-2"
                                 @click="removeItem(item.id), updateHeader()">Rimuovi</button>
                         </div>
                     </li>
                 </ul>
+                <button class="btn btn-success">Procede to next step</button>
             </div>
             <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
         </div>
