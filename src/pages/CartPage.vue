@@ -1,4 +1,5 @@
 <script>
+import { callWithAsyncErrorHandling } from 'vue';
 import AppHeader from '../components/AppHeader.vue'
 export default {
     components: {
@@ -26,13 +27,24 @@ export default {
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
         }
     },
-    created() {
+    computed: {
+        totalPrice() {
+            let totalPrice = 0;
+            this.cartItems.forEach(item => {
+                totalPrice = totalPrice + (item.price * item.quantity)
+            });
 
+            return totalPrice
+        }
+    },
+    created() {
         const storedItems = localStorage.getItem('cartItems');
 
         if (storedItems) {
             this.cartItems = JSON.parse(storedItems);
         }
+
+        console.log(this.cartItems)
     },
 };
 </script>
@@ -58,6 +70,7 @@ export default {
                         </div>
                     </li>
                 </ul>
+                <div class="my-3">Totale ordine: {{ totalPrice }} €</div>
                 <button class="btn btn-success">Procede to next step</button>
             </div>
             <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
