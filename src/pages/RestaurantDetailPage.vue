@@ -29,7 +29,6 @@ export default {
             }).then(() => { this.isLoading = false })
         },
         addToCart(itemToAdd) {
-            console.log(itemToAdd);
             const existingItemIndex = this.cartItems.findIndex(item => item.id === itemToAdd.id);
 
             if (existingItemIndex !== -1) {
