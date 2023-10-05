@@ -16,6 +16,14 @@ export default {
         },
         updateHeader() {
             this.$refs.header.updateCartCount()
+        },
+        increaseQuantity(item) {
+            item.quantity++
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        },
+        decreseQuantity(item) {
+            item.quantity--
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
         }
     },
     created() {
@@ -39,7 +47,11 @@ export default {
                     <li v-for="item in cartItems" :key="item.id">
                         <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
                             {{ item.name }} - {{ item.price }} €
-                            <span class="text-danger">{{ item.quantity }}</span>
+                            <span class="text-danger">
+                                <button v-if="item.quantity > 1" @click="decreseQuantity(item)">-</button>
+                                {{ item.quantity }}
+                                <button @click="increaseQuantity(item)">+</button>
+                            </span>
                             <button class="btn btn-danger my-2"
                                 @click="removeItem(item.id), updateHeader()">Rimuovi</button>
                         </div>
