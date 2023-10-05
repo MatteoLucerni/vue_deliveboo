@@ -24,6 +24,7 @@ export default {
             keywordFilter: '',
             isLoading: false,
             showAllTypes: false,
+            storage_path: 'http://127.0.0.1:8000/storage/'
         };
     },
     computed: {
@@ -145,9 +146,7 @@ export default {
                         <div class="restaurant-card d-flex flex-column p-4 bg-light h-100 justify-content-between">
                             <!-- Set a fixed aspect ratio for the images -->
                             <div class="image-fluid ratio ratio-4x3 mb-3">
-                                <img class="rounded-3"
-                                    :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                                    :alt="restaurant.name">
+                                <img class="rounded-3" :src="storage_path + restaurant.image" :alt="restaurant.name">
                             </div>
                             <h2 class="mb-2">{{ restaurant.name }}</h2>
                             <small>Types:</small>

@@ -13,7 +13,8 @@ export default {
             endpoint: 'http://127.0.0.1:8000/api/restaurants/' + this.$route.params.id,
             restaurant: {},
             plates: {},
-            isLoading: false
+            isLoading: false,
+            storage_path: 'http://127.0.0.1:8000/storage/'
         }
     },
     methods: {
@@ -60,9 +61,8 @@ export default {
                     </div>
 
                     <!-- restaurant image -->
-                    <div class=" col-12 col-lg-6">
-                        <img class="rounded-4 mb-3 img-fluid ratio ratio-4x3"
-                            :src="restaurant.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
+                    <div v-if="restaurant.image" class=" col-12 col-lg-6">
+                        <img class="rounded-4 mb-3 img-fluid ratio ratio-4x3" :src="storage_path + restaurant.image"
                             :alt="restaurant.name">
                     </div>
 
@@ -88,9 +88,7 @@ export default {
 
                             <!-- dish image -->
                             <div class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
-                                <img class="rounded-4"
-                                    :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
-                                    :alt="plate.name">
+                                <img class="rounded-4" :src="storage_path + plate.image" :alt="plate.name">
                                 <button class="button-cart-db rounded-4"><i
                                         class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>
                             </div>
