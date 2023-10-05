@@ -80,7 +80,7 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="pt-5">
+    <div class="pt-5 background-color-page">
         <div class="container">
             <h1 class="text-center pb-3">Restaurants list</h1>
             <AppAlert :isOpen="showAlert" :type="alertType">
@@ -183,3 +183,9 @@ export default {
     </div>
     <AppLoader v-if="isLoading" />
 </template>
+
+<style scoped>
+.background-color-page {
+    background-color: #ffebe3;
+}
+</style>
