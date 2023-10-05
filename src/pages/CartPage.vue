@@ -26,6 +26,8 @@ export default {
             }
 
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+
+            this.updateHeader()
         }
 
     },
