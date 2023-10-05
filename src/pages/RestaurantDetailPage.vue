@@ -87,10 +87,12 @@ export default {
                         <div class="restaurant-card h-100 p-3 plate-card">
 
                             <!-- dish image -->
-                            <div class=" img-fluid ratio ratio-4x3  mb-4">
+                            <div class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
                                 <img class="rounded-4"
                                     :src="plate.image ?? 'https://www.areafit.it/wp-content/uploads/2022/08/placeholder.png'"
                                     :alt="plate.name">
+                                <button class="button-cart-db rounded-4"><i
+                                        class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>
                             </div>
 
                             <!-- dish details -->
@@ -120,13 +122,16 @@ export default {
     </div>
 </template>
     
-<style scoped>
+<style scoped lang="scss">
 .background-color-page {
     background-color: #ffebe3;
 }
 
 .plate-card {
     background-color: #f6f6f6;
+}
 
+.img-hover:hover .button-cart-db {
+    display: block;
 }
 </style>
