@@ -15,6 +15,16 @@ export default {
             }
         }
     },
+    computed: {
+        totalQuantity() {
+            let totalQuantity = 0;
+            this.cartItems.forEach(item => {
+                totalQuantity = totalQuantity + item.quantity
+            });
+
+            return totalQuantity
+        }
+    },
     created() {
 
         const storedItems = localStorage.getItem('cartItems');
@@ -22,6 +32,8 @@ export default {
         if (storedItems) {
             this.cartItems = JSON.parse(storedItems);
         }
+
+        console.log(this.cartItems)
     },
 }
 </script>
@@ -48,7 +60,7 @@ export default {
                 </ul>
             </div>
             <div class="d-flex justify-content-end align-item-center">
-                <span class="text-dark me-2">{{ cartItems.length }}</span>
+                <span class="text-dark me-2">{{ totalQuantity }}</span>
                 <RouterLink :to="{ name: 'cart' }"><i class="fa-solid fa-cart-shopping text-dark me-5 cart"></i>
                 </RouterLink>
             </div>
