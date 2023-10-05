@@ -11,7 +11,8 @@ export default {
     <AppHeader />
     <div class="background-color-page py-3">
         <div class="container">
-
+            <h1>Cart Page</h1>
+            <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
         </div>
     </div>
 </template>
