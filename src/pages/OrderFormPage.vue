@@ -21,12 +21,12 @@ export default {
         };
     },
     methods: {
-        SendOrder() {
+        sendOrder() {
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
             const requestData = {
                 cartItems: this.cartItems,
                 orderData: this.orderData,
-                totalPrice: this.totalPrice
+                totalPrice: Number(this.totalPrice)
             };
 
             // Invia i dati al backend
@@ -84,7 +84,7 @@ export default {
                     </ul>
                 </div>
             </div>
-            <form action="POST" @submit.prevent="SendOrder">
+            <form action="POST" @submit.prevent="sendOrder" novalidate>
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Nome</label>
@@ -103,7 +103,7 @@ export default {
                     </div>
                     <div class="col-6">
                         <label for="order-tel" class="form-label">telefono</label>
-                        <input v-model="orderData.tel" id="order-tel" type="tel" class="form-control"
+                        <input v-model="orderData.tel" id="order-tel" type="number" class="form-control"
                             placeholder="Inserisci il tuo telefono">
                     </div>
                     <div class="col-12">
