@@ -54,6 +54,13 @@ export default {
             this.$refs.header.updateCartCount()
         }
     },
+
+    computed: {
+    visiblePlates() {
+      return this.plates.filter(plate => plate.is_visible);
+    }
+    },
+
     created() {
         this.getRestaurant()
 
@@ -115,7 +122,7 @@ export default {
             <div class="restaurant-card my-4 p-3">
                 <h1 class="mb-4 fw-bolder text-center">Menù</h1>
                 <div class="row g-3">
-                    <div v-if="plates.length" v-for="plate in plates" :key="plate.id"
+                    <div v-if="plates.length" v-for="plate in visiblePlates" :key="plate.id"
                         class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="restaurant-card h-100 p-3 plate-card">
 
