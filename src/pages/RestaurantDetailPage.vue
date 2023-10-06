@@ -39,10 +39,8 @@ export default {
 
             if (checkPassed) {
                 if (existingItemIndex !== -1) {
-                    // Se l'elemento esiste già nel carrello, incrementa la quantità
                     this.cartItems[existingItemIndex].quantity += 1;
                 } else {
-                    // Altrimenti, aggiungi un nuovo elemento con quantità 1
                     this.cartItems.push({ ...itemToAdd, quantity: 1 });
                 }
                 localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
