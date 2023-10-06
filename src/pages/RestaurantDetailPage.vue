@@ -15,7 +15,7 @@ export default {
             plates: [],
             isLoading: false,
             storage_path: 'http://127.0.0.1:8000/storage/',
-            cartItems: []
+            cartItems: [],
         }
     },
     methods: {
@@ -39,22 +39,37 @@ export default {
 
             if (checkPassed) {
                 if (existingItemIndex !== -1) {
-                    // Se l'elemento esiste già nel carrello, incrementa la quantità
                     this.cartItems[existingItemIndex].quantity += 1;
                 } else {
-                    // Altrimenti, aggiungi un nuovo elemento con quantità 1
                     this.cartItems.push({ ...itemToAdd, quantity: 1 });
                 }
                 localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
             } else {
-                alert('You cannot add plates from different restaurants!')
+                this.startModal(itemToAdd);
             }
         },
         updateHeader() {
             this.$refs.header.updateCartCount()
+        },
+        startModal(item) {
+            const deleteModal = document.getElementById('deleteModal');
+            const confirmButton = document.getElementById('confirm-button');
+            const bootstrapModal = new bootstrap.Modal(deleteModal);
+            bootstrapModal.show();
+            confirmButton.addEventListener('click', () => {
+                this.emptyCart();
+                this.addToCart(item)
+                this.updateHeader();
+            })
+        },
+        emptyCart() {
+            this.cartItems = []
+            localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+            console.log('Cart is now empty')
         }
     },
     created() {
+
         this.getRestaurant()
 
         const storedItems = localStorage.getItem('cartItems');
@@ -71,6 +86,27 @@ export default {
     <AppHeader ref="header" />
     <div class="background-color-page py-3">
         <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>You already have plates in the cart from another restaurant. Do you want to discard them and
+                                create a new cart in this new restaurant?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="confirm-button" type="button" class="btn btn-warning"
+                                data-bs-dismiss="modal">Discard items in the
+                                cart</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- BACK BUTTON -->
             <button @click="$router.push({ name: 'home' })"
@@ -104,7 +140,7 @@ export default {
                             <h5><strong>Address: </strong>{{ restaurant.address }}</h5>
                             <h5 class="my-4"><strong>Phone: </strong>{{ restaurant.phone_number }}</h5>
                             <h5><strong>Info:</strong></h5>
-                            <p><strong>{{ restaurant.description }}</strong></p>
+                            <p>{{ restaurant.description }}</p>
                         </div>
                     </div>
 

@@ -32,8 +32,6 @@ export default {
         if (storedItems) {
             this.cartItems = JSON.parse(storedItems);
         }
-
-        console.log(this.cartItems)
     },
 }
 </script>
