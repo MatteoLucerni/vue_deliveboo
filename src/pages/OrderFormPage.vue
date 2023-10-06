@@ -33,7 +33,7 @@ export default {
             axios.post(this.endpoint, requestData)
                 .then(response => {
                     console.log('Ordine inviato con successo:', response.data);
-                    this.$router.push({ name: 'order-confirm' });
+                    // this.$router.push({ name: 'order-confirm' });
                 })
                 .catch(error => {
                     // Gestisci eventuali errori
@@ -52,7 +52,6 @@ export default {
             return totalPrice
         }
     }, created() {
-
         this.cartItems = this.$route.params.cartItems;
 
         const storedItems = localStorage.getItem('cartItems');
@@ -61,7 +60,27 @@ export default {
             this.cartItems = JSON.parse(storedItems);
         }
     },
-    // Il resto del tuo componente
+    mounted() { // Spostiamo il codice all'interno di mounted()
+        const form = document.getElementById('payment-form');
+
+        braintree.dropin.create({
+            authorization: 'sandbox_csjrhkwf_rpfz7j9mv8rwr28x',
+            container: '#dropin-container'
+        }, (error, dropinInstance) => {
+            if (error) console.error(error);
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+
+                dropinInstance.requestPaymentMethod((error, payload) => {
+                    if (error) console.error(error);
+                    console.log(payload)
+                    document.getElementById('nonce').value = payload.nonce;
+                    form.submit();
+                });
+            });
+        });
+    },
 };
 </script>
 
@@ -76,7 +95,8 @@ export default {
                     <button @click="$router.back()" class="btn btn-secondary my-4">Go back</button>
                 </div>
             </div>
-            <form action="POST" @submit.prevent="sendOrder" novalidate>
+            <!-- <form id="payment-form" action="POST" novalidate> -->
+            <form id="payment-form" action="POST" @submit.prevent="sendOrder" novalidate>
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name</label>
@@ -107,9 +127,11 @@ export default {
                         <label for="order-note" class="form-label">Note</label>
                         <textarea v-model="orderData.note" id="order-note" type="text" class="form-control"></textarea>
                     </div>
+                    <div id="dropin-container"></div>
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-success">Send Order</button>
+                            <input type="hidden" id="nonce" name="payment_method_nonce" />
                         </div>
                     </div>
                 </div>
