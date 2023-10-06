@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             cartItems: []
+
         };
     },
     methods: {
@@ -55,37 +56,86 @@ export default {
 
 <template>
     <AppHeader ref="header" />
-    <div class="background-color-page py-3">
+    <div class="background-color-page pt-1 pb-5">
         <div class="container">
-            <div>
-                <h2>Il tuo carrello:</h2>
-                <ul class="list-unstyled">
-                    <li v-for="item in cartItems" :key="item.id">
-                        <div class="card my-3 px-5 d-flex flex-row align-items-center justify-content-between">
-                            {{ item.name }} - {{ item.price }} €
-                            <span class="text-danger">
-                                <button class="btn border me-2" v-if="item.quantity > 1"
-                                    @click="changeQuantity(item, 'decrease')">Less</button>
-                                {{ item.quantity }}
-                                <button class="btn border ms-2" @click="changeQuantity(item, 'increase')">More</button>
-                            </span>
-                            <button class="btn btn-danger my-2"
-                                @click="removeItem(item.id), updateHeader()">Rimuovi</button>
-                        </div>
-                    </li>
-                </ul>
-                <div class="my-3">Totale ordine: {{ totalPrice }} €</div>
-                <RouterLink :to="{ name: 'order-form' }" class="btn btn-success">Procede
-                    to next step</RouterLink>
+
+            <!-- BACK BUTTON -->
+            <button @click="$router.back" class="button-main-db margin d-flex  justify-content-center align-items-center">
+                <div>
+                    <strong><i class="fa-solid fa-arrow-left"></i></strong>
+                </div>
+                <div>
+                    <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
+                </div>
+            </button>
+
+            <h1 class="text-center my-4">Your Cart</h1>
+            <div class="row my-4 box g-1" v-for="item in cartItems" :key="item.id">
+
+                <div
+                    class=" col-12 col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start  mb-3 mb-lg-0  ">
+                    <div class="fs-5">
+                        {{ item.name }} - {{ item.price }} €
+                    </div>
+
+                </div>
+                <div
+                    class=" col-12 col-sm-6 col-md-8 col-lg-3    justify-content-md-start justify-content-lg-end  d-flex align-items-end align-items-lg-center justify-content-center ">
+                    <span class="text-danger">
+                        <button class="button-warning-db mx-3 " v-if="item.quantity > 1"
+                            @click="changeQuantity(item, 'decrease')"><i class="fa-solid fa-minus"></i></button>
+                        {{ item.quantity }}
+                        <button class="button-warning-db mx-3" @click="changeQuantity(item, 'increase')"><i
+                                class="fa-solid fa-plus"></i></button>
+                    </span>
+                </div>
+                <div
+                    class="  col-12 col-sm-6 col-md-4 col-lg-2  justify-content-md-end d-flex align-items-center justify-content-lg-end justify-content-center mt-3 mt-md-0   ">
+                    <button class="button-danger-db" @click="removeItem(item.id), updateHeader()"><strong>Remove</strong>
+                    </button>
+                </div>
             </div>
-            <button @click="$router.back()" class="btn btn-secondary mt-4">Go back</button>
+
+            <div class="row my-4">
+
+
+                <div
+                    class=" col-12 col-lg-10 d-flex align-items-center justify-content-center justify-content-lg-end my-4   ">
+                    <div class="fs-5">Total price: {{
+                        totalPrice }} €</div>
+                </div>
+
+                <div
+                    class="  col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-start justify-content-xl-center  ">
+                    <!-- CONFIRM BUTTON -->
+                    <RouterLink :to="{ name: 'order-form' }" class="button-main-db">Confirm
+                    </RouterLink>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.container {
+    font-weight: bold;
+}
+
 .background-color-page {
     background-color: #ffebe3;
-    height: 765px;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px #999898;
+    background-color: #f6f6f6;
+
+}
+
+.margin {
+    margin-top: 20px;
 }
 </style>
