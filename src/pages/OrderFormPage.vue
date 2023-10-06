@@ -15,8 +15,9 @@ export default {
                 email: '',
                 tel: '',
                 address: '',
-                note: ''
-            }
+                note: '',
+            },
+            endpoint: 'http://127.0.0.1:8000/api/orders'
         };
     },
     methods: {
@@ -24,20 +25,30 @@ export default {
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
             const requestData = {
                 cartItems: this.cartItems,
-                orderData: this.orderData
+                orderData: this.orderData,
+                totalPrice: this.totalPrice
             };
 
             // Invia i dati al backend
-            axios.post('/api/invia-ordine', requestData)
+            axios.post(this.endpoint, requestData)
                 .then(response => {
-                    // Gestisci la risposta dal backend (ad esempio, una conferma)
                     console.log('Ordine inviato con successo:', response.data);
-                    // Esegui eventuali azioni aggiuntive (ad esempio, reindirizzamento)
                 })
                 .catch(error => {
                     // Gestisci eventuali errori
                     console.error('Errore nell\'invio dell\'ordine:', error);
                 });
+        }
+    }, computed: {
+        totalPrice() {
+            let totalPrice = 0;
+            this.cartItems.forEach(item => {
+                totalPrice = totalPrice + (item.price * item.quantity)
+            });
+
+            totalPrice = totalPrice.toFixed(2)
+
+            return totalPrice
         }
     }, created() {
 
@@ -103,6 +114,9 @@ export default {
                     <div class="col-12">
                         <label for="order-note" class="form-label">Note</label>
                         <textarea v-model="orderData.note" id="order-note" type="text" class="form-control"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <p>{{ totalPrice }}</p>
                     </div>
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end">
