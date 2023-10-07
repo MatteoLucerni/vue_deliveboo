@@ -33,7 +33,7 @@ export default {
             axios.post(this.endpoint, requestData)
                 .then(response => {
                     console.log('Ordine inviato con successo:', response.data);
-                    // this.$router.push({ name: 'order-confirm' });
+                    this.$router.push({ name: 'order-confirm' });
                 })
                 .catch(error => {
                     // Gestisci eventuali errori
@@ -76,7 +76,7 @@ export default {
                     if (error) console.error(error);
                     console.log(payload)
                     document.getElementById('nonce').value = payload.nonce;
-                    form.submit();
+                    this.sendOrder()
                 });
             });
         });
@@ -96,7 +96,7 @@ export default {
                 </div>
             </div>
             <!-- <form id="payment-form" action="POST" novalidate> -->
-            <form id="payment-form" action="POST" @submit.prevent="sendOrder" novalidate>
+            <form id="payment-form" method="POST" @submit.prevent="">
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name</label>
