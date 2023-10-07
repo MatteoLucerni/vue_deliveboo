@@ -57,6 +57,9 @@ export default {
 <template>
     <AppHeader ref="header" />
     <div class="background-color-page pt-1 pb-5">
+        <video autoplay muted preload="auto" class="object-fit-contain">
+            <source src="../../public/cart.mp4" type="video/mp4">
+        </video>
         <div class="container">
 
             <!-- BACK BUTTON -->
@@ -69,7 +72,6 @@ export default {
                 </div>
             </button>
 
-            <h1 class="text-center my-4">Your Cart</h1>
             <div class="row my-4 box g-1" v-for="item in cartItems" :key="item.id">
 
                 <div

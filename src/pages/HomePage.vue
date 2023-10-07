@@ -220,8 +220,4 @@ export default {
 .card-layout {
     background-color: #ffebe3;
 }
-
-video {
-    max-width: 100vw;
-}
 </style>
