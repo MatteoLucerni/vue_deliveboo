@@ -76,6 +76,22 @@ export default {
     created() {
         this.fetchrestaurants();
     },
+    mounted() {
+        // Get a reference to the video element
+        const videoElement = document.querySelector('video'); // You can use a more specific selector if needed
+
+        // Function to play the video after a 2-second delay
+        const playVideoDelayed = () => {
+            setTimeout(() => {
+                if (videoElement && videoElement.paused) {
+                    videoElement.play();
+                }
+            }, 1000); // 2000 milliseconds (2 seconds)
+        };
+
+        // Call the playVideoDelayed function after the component has mounted
+        playVideoDelayed();
+    },
 };
 </script>
 
@@ -83,6 +99,9 @@ export default {
     <div class="background-color-page">
 
         <AppHeader />
+        <video autoplay muted preload="auto" class="object-fit-contain">
+            <source src="../../public/deliveboo-banner-orange.mp4" type="video/mp4">
+        </video>
         <div class="pt-5 ">
             <div class="container">
                 <AppAlert :isOpen="showAlert" :type="alertType">
@@ -200,5 +219,9 @@ export default {
 
 .card-layout {
     background-color: #ffebe3;
+}
+
+video {
+    max-width: 100vw;
 }
 </style>
