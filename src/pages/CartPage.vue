@@ -98,20 +98,22 @@ export default {
                 </div>
             </div>
 
-            <div class="row my-4">
+            <div class="my-4">
+                <h3 v-if="!cartItems.length" class="text-danger text-center fw-bold">Cart is empty</h3>
 
+                <div v-else class="row">
+                    <div
+                        class=" col-12 col-lg-10 d-flex align-items-center justify-content-center justify-content-lg-end my-4   ">
+                        <div class="fs-5">Total price: {{
+                            totalPrice }} €</div>
+                    </div>
 
-                <div
-                    class=" col-12 col-lg-10 d-flex align-items-center justify-content-center justify-content-lg-end my-4   ">
-                    <div class="fs-5">Total price: {{
-                        totalPrice }} €</div>
-                </div>
-
-                <div
-                    class="  col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-start justify-content-xl-center  ">
-                    <!-- CONFIRM BUTTON -->
-                    <RouterLink :to="{ name: 'order-form' }" class="button-main-db">Confirm
-                    </RouterLink>
+                    <div
+                        class="  col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-start justify-content-xl-center  ">
+                        <!-- CONFIRM BUTTON -->
+                        <RouterLink :to="{ name: 'order-form' }" class="button-main-db">Confirm
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
         </div>
