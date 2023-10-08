@@ -99,28 +99,28 @@ export default {
             <form id="payment-form" method="POST">
                 <div class="row">
                     <div class="col-6">
-                        <label for="order-name" class="form-label">Name</label>
-                        <input v-model="orderData.name" id="order-name" class="form-control" type="text"
+                        <label for="order-name" class="form-label">Name *</label>
+                        <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
                             placeholder="Insert your name">
                     </div>
                     <div class="col-6">
-                        <label for="order-surname" class="form-label">Surname</label>
-                        <input v-model="orderData.surname" id="order-surname" class="form-control" type="text"
+                        <label for="order-surname" class="form-label">Surname *</label>
+                        <input required v-model="orderData.surname" id="order-surname" class="form-control" type="text"
                             placeholder="Insert your surname">
                     </div>
                     <div class="col-6">
-                        <label for="order-email" class="form-label">Mail</label>
-                        <input v-model="orderData.email" id="order-email" class="form-control" type="email"
+                        <label for="order-email" class="form-label">Mail *</label>
+                        <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
                             placeholder="Insert your email">
                     </div>
                     <div class="col-6">
-                        <label for="order-tel" class="form-label">Phone</label>
-                        <input v-model="orderData.tel" id="order-tel" type="number" class="form-control"
-                            placeholder="Insert your phone">
+                        <label for="order-tel" class="form-label">Phone *</label>
+                        <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
+                            type="number" class="form-control" placeholder="Insert your phone">
                     </div>
                     <div class="col-12">
-                        <label for="order-address" class="form-label">Address</label>
-                        <input v-model="orderData.address" id="order-address" type="text" class="form-control"
+                        <label for="order-address" class="form-label">Address *</label>
+                        <input required v-model="orderData.address" id="order-address" type="text" class="form-control"
                             placeholder="Insert your address">
                     </div>
                     <div class="col-12">
