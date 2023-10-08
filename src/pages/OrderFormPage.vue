@@ -52,7 +52,6 @@ export default {
             return totalPrice
         }
     }, created() {
-
         this.cartItems = this.$route.params.cartItems;
 
         const storedItems = localStorage.getItem('cartItems');
@@ -61,7 +60,31 @@ export default {
             this.cartItems = JSON.parse(storedItems);
         }
     },
-    // Il resto del tuo componente
+    mounted() { // Spostiamo il codice all'interno di mounted()
+        const form = document.getElementById('payment-form');
+
+        braintree.dropin.create({
+            container: document.getElementById('dropin-container'),
+            authorization: 'sandbox_csjrhkwf_rpfz7j9mv8rwr28x',
+            sandboxMerchantId: 'rpfz7j9mv8rwr28x',
+            publickKey: 'r869z8337v2spxhs',
+            privateKey: 'aab0bb29513f23f66139513f2cdccef6',
+            // container: '#dropin-container'
+        }, (error, dropinInstance) => {
+            if (error) console.error(error);
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+
+                dropinInstance.requestPaymentMethod((error, payload) => {
+                    if (error) console.error(error);
+                    console.log(payload)
+                    document.getElementById('nonce').value = payload.nonce;
+                    this.sendOrder()
+                });
+            });
+        });
+    },
 };
 </script>
 
@@ -76,7 +99,8 @@ export default {
                     <button @click="$router.back()" class="button-secondary-db my-4">Go back</button>
                 </div>
             </div>
-            <form action="POST" @submit.prevent="sendOrder" novalidate>
+            <!-- <form id="payment-form" action="POST" novalidate> -->
+            <form id="payment-form" method="POST">
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name</label>
@@ -107,9 +131,12 @@ export default {
                         <label for="order-note" class="form-label">Note</label>
                         <textarea v-model="orderData.note" id="order-note" type="text" class="form-control"></textarea>
                     </div>
+                    <div id="dropin-container"></div>
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end">
                             <button class="button-main-db">Send Order</button>
+                            <input type="hidden" id="nonce" name="payment_method_nonce" />
+
                         </div>
                     </div>
                 </div>
@@ -121,6 +148,6 @@ export default {
 <style scoped>
 .background-color-page {
     background-color: #ffebe3;
-    height: 765px;
+
 }
 </style>
