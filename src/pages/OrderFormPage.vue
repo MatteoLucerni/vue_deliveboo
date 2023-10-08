@@ -73,7 +73,7 @@ export default {
                 Complete Your Order</h2>
             <div class="row">
                 <div class="col-6">
-                    <button @click="$router.back()" class="btn btn-secondary my-4">Go back</button>
+                    <button @click="$router.back()" class="button-secondary-db my-4">Go back</button>
                 </div>
             </div>
             <form action="POST" @submit.prevent="sendOrder" novalidate>
@@ -109,7 +109,7 @@ export default {
                     </div>
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success">Send Order</button>
+                            <button class="button-main-db">Send Order</button>
                         </div>
                     </div>
                 </div>
