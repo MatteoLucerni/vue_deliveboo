@@ -92,13 +92,7 @@ export default {
     <AppHeader />
     <div class="background-color-page py-3">
         <div class="container">
-            <h2>
-                Complete Your Order</h2>
-            <div class="row">
-                <div class="col-6">
-                    <button @click="$router.back()" class="button-secondary-db my-4">Go back</button>
-                </div>
-            </div>
+            <h2>Complete Your Order</h2>
             <!-- <form id="payment-form" action="POST" novalidate> -->
             <form id="payment-form" method="POST">
                 <div class="row">
@@ -133,10 +127,10 @@ export default {
                     </div>
                     <div id="dropin-container"></div>
                     <div class="col-12 mt-3">
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end gap-3">
+                            <button @click="$router.back()" class="button-secondary-db">Go back</button>
                             <button class="button-main-db">Send Order</button>
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
-
                         </div>
                     </div>
                 </div>
