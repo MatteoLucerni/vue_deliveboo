@@ -44,10 +44,10 @@ export default {
     <AppHeader />
     <div class="background-color-page py-3">
         <div class="container">
-            <h1 class="text-success py-3">Thanks! Your Order Has Been Place Correctly</h1>
+            <h1 class="text-success py-3">Thanks! Your order has been placed correctly</h1>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title mb-5">
                         Order Summary</h5>
                     <ul>
                         <li class="card-text" v-for="item in cartItems" :key="item.id">
