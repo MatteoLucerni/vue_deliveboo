@@ -17,7 +17,8 @@ export default {
                 address: '',
                 note: '',
             },
-            endpoint: 'http://127.0.0.1:8000/api/orders'
+            endpoint: 'http://127.0.0.1:8000/api/orders',
+            paymentInfo: null
         };
     },
     methods: {
@@ -26,7 +27,8 @@ export default {
             const requestData = {
                 cartItems: this.cartItems,
                 orderData: this.orderData,
-                totalPrice: Number(this.totalPrice)
+                totalPrice: Number(this.totalPrice),
+                paymentInfo: this.paymentInfo
             };
 
             // Invia i dati al backend
@@ -80,6 +82,7 @@ export default {
                     if (error) console.error(error);
                     console.log(payload)
                     document.getElementById('nonce').value = payload.nonce;
+                    this.paymentInfo = payload;
                     this.sendOrder()
                 });
             });
@@ -93,7 +96,6 @@ export default {
     <div class="background-color-page py-3">
         <div class="container">
             <h2>Complete Your Order</h2>
-            <!-- <form id="payment-form" action="POST" novalidate> -->
             <form id="payment-form" method="POST">
                 <div class="row">
                     <div class="col-6">
