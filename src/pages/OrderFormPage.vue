@@ -96,7 +96,7 @@ export default {
                 Complete Your Order</h2>
             <div class="row">
                 <div class="col-6">
-                    <button @click="$router.back()" class="btn btn-secondary my-4">Go back</button>
+                    <button @click="$router.back()" class="button-secondary-db my-4">Go back</button>
                 </div>
             </div>
             <!-- <form id="payment-form" action="POST" novalidate> -->
@@ -136,6 +136,7 @@ export default {
                         <div class="d-flex justify-content-end">
                             <button class="button-main-db">Send Order</button>
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
+
                         </div>
                     </div>
                 </div>
