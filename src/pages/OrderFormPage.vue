@@ -64,8 +64,12 @@ export default {
         const form = document.getElementById('payment-form');
 
         braintree.dropin.create({
+            container: document.getElementById('dropin-container'),
             authorization: 'sandbox_csjrhkwf_rpfz7j9mv8rwr28x',
-            container: '#dropin-container'
+            sandboxMerchantId: 'rpfz7j9mv8rwr28x',
+            publickKey: 'r869z8337v2spxhs',
+            privateKey: 'aab0bb29513f23f66139513f2cdccef6',
+            // container: '#dropin-container'
         }, (error, dropinInstance) => {
             if (error) console.error(error);
 
@@ -96,7 +100,7 @@ export default {
                 </div>
             </div>
             <!-- <form id="payment-form" action="POST" novalidate> -->
-            <form id="payment-form" method="POST" @submit.prevent="">
+            <form id="payment-form" method="POST">
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name</label>
@@ -130,7 +134,7 @@ export default {
                     <div id="dropin-container"></div>
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-success">Send Order</button>
+                            <button class="button-main-db">Send Order</button>
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
                         </div>
                     </div>
@@ -143,6 +147,6 @@ export default {
 <style scoped>
 .background-color-page {
     background-color: #ffebe3;
-    height: 765px;
+
 }
 </style>
