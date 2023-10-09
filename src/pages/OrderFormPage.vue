@@ -93,12 +93,12 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="py-3">
+    <div class="py-3 bg-white ">
         <div class="container">
             <h2 class="py-3">Complete Your Order</h2>
         </div>
     </div>
-    <div class="background-color-page py-4">
+    <div class="py-4">
         <div class="container">
             <div class="restaurant-card p-5">
 
