@@ -18,6 +18,7 @@ export default {
                 note: '',
             },
             errors: {},
+            formValid : true,
             endpoint: 'http://127.0.0.1:8000/api/orders',
             paymentInfo: null
         };
@@ -34,36 +35,43 @@ export default {
             //name
             if (!this.orderData.name.trim()) {
             this.errors.nameRequired = "Name is required";
+            this.formValid = false;
             }
             //surname
             if (!this.orderData.surname.trim()) {
             this.errors.surnameRequired = "Surname is required";
+            this.formValid = false;
             }
             //email
             if (!this.orderData.email.trim()) {
-            this.errors.emailRequired = "Email is required";
-            }
-            if (!validateEmail) {
-            this.errors.emailInvalid = "Email is invalid";
-            return
+                this.errors.emailRequired = "Email is required";
+                this.formValid = false;
+            } else if (!this.validateEmail(this.orderData.email)) {
+                this.errors.emailInvalid = "Email is invalid";
+                this.formValid = false;
             }
             //tel
             if (!this.orderData.tel.trim()) {
             this.errors.telRequired = "tel is required";
+            this.formValid = false;
             }
             if (isNaN(this.orderData.tel.trim())) {
             this.errors.telInvalid = "tel is invalid";
+            this.formValid = false;
             }
             //address
             if (!this.orderData.address.trim()) {
             this.errors.addressRequired = "Address is required";
+            this.formValid = false;
             }
-
-            return Object.keys(this.errors).length === 0;
+            return this.formValid
+            
     },
     
-
         sendOrder() {
+            if(!this.formValid){
+                return;
+            }
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
             const requestData = {
                 cartItems: this.cartItems,
@@ -124,8 +132,10 @@ export default {
                     console.log(payload)
                     document.getElementById('nonce').value = payload.nonce;
                     this.paymentInfo = payload;
+
                     this.sendOrder()
                 });
+                
             });
         });
     },
@@ -142,27 +152,27 @@ export default {
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name *</label>
                         <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
-                            placeholder="Insert your name">
+                            placeholder="Insert your name" :class="{ 'is-invalid': errors.nameRequired }">
                     </div>
                     <div class="col-6">
                         <label for="order-surname" class="form-label">Surname *</label>
                         <input required v-model="orderData.surname" id="order-surname" class="form-control" type="text"
-                            placeholder="Insert your surname">
+                            placeholder="Insert your surname" :class="{ 'is-invalid': errors.surnameRequired }">
                     </div>
                     <div class="col-6">
                         <label for="order-email" class="form-label">Mail *</label>
                         <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
-                            placeholder="Insert your email">
+                            placeholder="Insert your email" :class="{ 'is-invalid': errors.emailRequired }">
                     </div>
                     <div class="col-6">
                         <label for="order-tel" class="form-label">Phone *</label>
                         <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
-                            type="number" class="form-control" placeholder="Insert your phone">
+                            type="number" class="form-control" placeholder="Insert your phone" :class="{ 'is-invalid': errors.telRequired }">
                     </div>
                     <div class="col-12">
                         <label for="order-address" class="form-label">Address *</label>
                         <input required v-model="orderData.address" id="order-address" type="text" class="form-control"
-                            placeholder="Insert your address">
+                            placeholder="Insert your address" :class="{ 'is-invalid': errors.addressRequired }">
                     </div>
                     <div class="col-12">
                         <label for="order-note" class="form-label">Note</label>
@@ -172,7 +182,7 @@ export default {
                     <div class="col-12 mt-3">
                         <div class="d-flex justify-content-end gap-3">
                             <button @click="$router.back()" class="button-secondary-db">Go back</button>
-                            <button class="button-main-db">Send Order</button>
+                            <button class="button-main-db" @click="validateForm()">Send Order</button>
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
                         </div>
                     </div>
