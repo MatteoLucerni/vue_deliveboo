@@ -1,10 +1,12 @@
 <script>
 import AppHeader from '../components/AppHeader.vue';
+import AppLoader from '../components/AppLoader.vue';
 import axios from 'axios';
 
 export default {
     components: {
-        AppHeader
+        AppHeader,
+        AppLoader
     },
     data() {
         return {
@@ -17,12 +19,63 @@ export default {
                 address: '',
                 note: '',
             },
+            errors: {},
+            formValid : true,
             endpoint: 'http://127.0.0.1:8000/api/orders',
-            paymentInfo: null
+            paymentInfo: null,
+            pageLoaded: true,
         };
     },
     methods: {
+        // check @ is in a mail
+        validateEmail(email) {
+            const regex = /\S+@\S+\.\S+/;
+            return regex.test(email);
+        },
+        //validation for form
+        validateForm(){
+            this.errors = {};   
+            this.formValid = true;
+            //name
+            if (!this.orderData.name.trim()) {
+            this.errors.nameRequired = "Name is required";
+            this.formValid = false;
+            }
+            //surname
+            if (!this.orderData.surname.trim()) {
+            this.errors.surnameRequired = "Surname is required";
+            this.formValid = false;
+            }
+            //email
+            if (!this.orderData.email.trim()) {
+                this.errors.emailRequired = "Email is required";
+                this.formValid = false;
+            } else if (!this.validateEmail(this.orderData.email)) {
+                this.errors.emailInvalid = "Email is invalid";
+                this.formValid = false;
+            }
+            //tel
+            if (!this.orderData.tel) {
+            this.errors.telRequired = "tel is required";
+            this.formValid = false;
+            }
+            if (isNaN(this.orderData.tel)) {
+            this.errors.telInvalid = "tel is invalid";
+            this.formValid = false;
+            }
+            //address
+            if (!this.orderData.address.trim()) {
+            this.errors.addressRequired = "Address is required";
+            this.formValid = false;
+            }
+            return this.formValid
+            
+    },
+    
         sendOrder() {
+            if(!this.formValid){
+                return;
+            }
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
             const requestData = {
                 cartItems: this.cartItems,
@@ -75,23 +128,29 @@ export default {
         }, (error, dropinInstance) => {
             if (error) console.error(error);
 
-            form.addEventListener('submit', event => {
-                event.preventDefault();
+            this.pageLoaded = false,
+                form.addEventListener('submit', event => {
+                    event.preventDefault();
+
 
                 dropinInstance.requestPaymentMethod((error, payload) => {
                     if (error) console.error(error);
                     console.log(payload)
                     document.getElementById('nonce').value = payload.nonce;
                     this.paymentInfo = payload;
+
                     this.sendOrder()
                 });
+                
             });
+
         });
     },
 };
 </script>
 
 <template>
+    <AppLoader v-if="pageLoaded" />
     <AppHeader />
     <video autoplay muted preload="auto" class="object-fit-contain">
         <source src="../../public/complete-order.mp4" type="video/mp4">

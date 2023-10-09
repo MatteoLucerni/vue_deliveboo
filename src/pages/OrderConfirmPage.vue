@@ -70,6 +70,7 @@ export default {
 <style scoped>
 .background-color-page {
     background-color: #ffebe3;
-    height: 765px;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 </style>
