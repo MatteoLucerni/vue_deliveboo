@@ -35,6 +35,7 @@ export default {
         //validation for form
         validateForm(){
             this.errors = {};   
+            this.formValid = true;
             //name
             if (!this.orderData.name.trim()) {
             this.errors.nameRequired = "Name is required";
