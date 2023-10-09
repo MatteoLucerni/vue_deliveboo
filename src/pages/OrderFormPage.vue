@@ -17,11 +17,52 @@ export default {
                 address: '',
                 note: '',
             },
+            errors: {},
             endpoint: 'http://127.0.0.1:8000/api/orders',
             paymentInfo: null
         };
     },
     methods: {
+        // check @ is in a mail
+        validateEmail(email) {
+            const regex = /\S+@\S+\.\S+/;
+            return regex.test(email);
+        },
+        //validation for form
+        validateForm(){
+            this.errors = {};   
+            //name
+            if (!this.orderData.name.trim()) {
+            this.errors.nameRequired = "Name is required";
+            }
+            //surname
+            if (!this.orderData.surname.trim()) {
+            this.errors.surnameRequired = "Surname is required";
+            }
+            //email
+            if (!this.orderData.email.trim()) {
+            this.errors.emailRequired = "Email is required";
+            }
+            if (!validateEmail) {
+            this.errors.emailInvalid = "Email is invalid";
+            return
+            }
+            //tel
+            if (!this.orderData.tel.trim()) {
+            this.errors.telRequired = "tel is required";
+            }
+            if (isNaN(this.orderData.tel.trim())) {
+            this.errors.telInvalid = "tel is invalid";
+            }
+            //address
+            if (!this.orderData.address.trim()) {
+            this.errors.addressRequired = "Address is required";
+            }
+
+            return Object.keys(this.errors).length === 0;
+    },
+    
+
         sendOrder() {
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
             const requestData = {
@@ -96,7 +137,7 @@ export default {
     <div class="background-color-page py-3">
         <div class="container">
             <h2>Complete Your Order</h2>
-            <form id="payment-form" method="POST">
+            <form id="payment-form" method="POST" novalidate>
                 <div class="row">
                     <div class="col-6">
                         <label for="order-name" class="form-label">Name *</label>
