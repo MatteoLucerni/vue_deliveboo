@@ -42,24 +42,26 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="pb-5">
-        <video autoplay muted preload="auto" class="object-fit-contain">
-            <source src="../../public/order.mp4" type="video/mp4">
-        </video>
-        <div class="container pt-4">
-            <div class="restaurant-card p-5">
-                <h1 class="text-success py-3">Thanks! Your order has been placed correctly</h1>
-                <div class="card-body">
-                    <h5 class="card-title mb-5">
-                        Order Summary:</h5>
-                    <ul>
-                        <li class="card-text" v-for="item in cartItems" :key="item.id">
-                            <p>{{ item.name }} - {{ item.price }} € - {{ item.quantity }} quantity</p>
-                        </li>
-                    </ul>
-                    <div class="d-flex justify-content-end">
-                        <RouterLink @click="emptyCart" :to="{ name: 'home' }" class="btn button-main-db">Return to home
-                        </RouterLink>
+    <div class="container-fluid px-0 overflow-x-hidden">
+        <div class="pb-5">
+            <video autoplay muted preload="auto" class="object-fit-contain">
+                <source src="../../public/order.mp4" type="video/mp4">
+            </video>
+            <div class="container pt-4">
+                <div class="restaurant-card p-5">
+                    <h1 class="text-success py-3">Thanks! Your order has been placed correctly</h1>
+                    <div class="card-body">
+                        <h5 class="card-title mb-5">
+                            Order Summary:</h5>
+                        <ul>
+                            <li class="card-text" v-for="item in cartItems" :key="item.id">
+                                <p>{{ item.name }} - {{ item.price }} € - {{ item.quantity }} quantity</p>
+                            </li>
+                        </ul>
+                        <div class="d-flex justify-content-end">
+                            <RouterLink @click="emptyCart" :to="{ name: 'home' }" class="btn button-main-db">Return to home
+                            </RouterLink>
+                        </div>
                     </div>
                 </div>
             </div>
