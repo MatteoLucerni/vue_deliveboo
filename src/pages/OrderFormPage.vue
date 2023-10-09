@@ -93,57 +93,58 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="background-color-page py-3">
+    <div class="py-3">
         <div class="container">
-            <h2>Complete Your Order</h2>
-            <form id="payment-form" method="POST">
-                <div class="row">
-                    <div class="col-6">
-                        <label for="order-name" class="form-label">Name *</label>
-                        <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
-                            placeholder="Insert your name">
-                    </div>
-                    <div class="col-6">
-                        <label for="order-surname" class="form-label">Surname *</label>
-                        <input required v-model="orderData.surname" id="order-surname" class="form-control" type="text"
-                            placeholder="Insert your surname">
-                    </div>
-                    <div class="col-6">
-                        <label for="order-email" class="form-label">Mail *</label>
-                        <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
-                            placeholder="Insert your email">
-                    </div>
-                    <div class="col-6">
-                        <label for="order-tel" class="form-label">Phone *</label>
-                        <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
-                            type="number" class="form-control" placeholder="Insert your phone">
-                    </div>
-                    <div class="col-12">
-                        <label for="order-address" class="form-label">Address *</label>
-                        <input required v-model="orderData.address" id="order-address" type="text" class="form-control"
-                            placeholder="Insert your address">
-                    </div>
-                    <div class="col-12">
-                        <label for="order-note" class="form-label">Note</label>
-                        <textarea v-model="orderData.note" id="order-note" type="text" class="form-control"></textarea>
-                    </div>
-                    <div id="dropin-container"></div>
-                    <div class="col-12 mt-3">
-                        <div class="d-flex justify-content-end gap-3">
-                            <button @click="$router.back()" class="button-secondary-db">Go back</button>
-                            <button class="button-main-db">Send Order</button>
-                            <input type="hidden" id="nonce" name="payment_method_nonce" />
+            <h2 class="py-3">Complete Your Order</h2>
+        </div>
+    </div>
+    <div class="background-color-page py-4">
+        <div class="container">
+            <div class="restaurant-card p-5">
+
+                <form id="payment-form" method="POST">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="order-name" class="form-label">Name *</label>
+                            <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
+                                placeholder="Insert your name">
+                        </div>
+                        <div class="col-6">
+                            <label for="order-surname" class="form-label">Surname *</label>
+                            <input required v-model="orderData.surname" id="order-surname" class="form-control" type="text"
+                                placeholder="Insert your surname">
+                        </div>
+                        <div class="col-6">
+                            <label for="order-email" class="form-label">Mail *</label>
+                            <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
+                                placeholder="Insert your email">
+                        </div>
+                        <div class="col-6">
+                            <label for="order-tel" class="form-label">Phone *</label>
+                            <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
+                                type="number" class="form-control" placeholder="Insert your phone">
+                        </div>
+                        <div class="col-12">
+                            <label for="order-address" class="form-label">Address *</label>
+                            <input required v-model="orderData.address" id="order-address" type="text" class="form-control"
+                                placeholder="Insert your address">
+                        </div>
+                        <div class="col-12">
+                            <label for="order-note" class="form-label">Note</label>
+                            <textarea v-model="orderData.note" id="order-note" type="text" class="form-control"></textarea>
+                        </div>
+                        <div id="dropin-container"></div>
+                        <div class="col-12 mt-3">
+                            <div class="d-flex justify-content-end gap-3">
+                                <button @click="$router.back()" class="button-secondary-db">Go back</button>
+                                <button class="button-main-db">Send Order</button>
+                                <input type="hidden" id="nonce" name="payment_method_nonce" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-.background-color-page {
-    background-color: #ffebe3;
-
-}
-</style>
