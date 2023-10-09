@@ -1,10 +1,12 @@
 <script>
 import AppHeader from '../components/AppHeader.vue';
+import AppLoader from '../components/AppLoader.vue';
 import axios from 'axios';
 
 export default {
     components: {
-        AppHeader
+        AppHeader,
+        AppLoader
     },
     data() {
         return {
@@ -18,7 +20,8 @@ export default {
                 note: '',
             },
             endpoint: 'http://127.0.0.1:8000/api/orders',
-            paymentInfo: null
+            paymentInfo: null,
+            pageLoaded: true,
         };
     },
     methods: {
@@ -75,23 +78,25 @@ export default {
         }, (error, dropinInstance) => {
             if (error) console.error(error);
 
-            form.addEventListener('submit', event => {
-                event.preventDefault();
+            this.pageLoaded = false,
+                form.addEventListener('submit', event => {
+                    event.preventDefault();
 
-                dropinInstance.requestPaymentMethod((error, payload) => {
-                    if (error) console.error(error);
-                    console.log(payload)
-                    document.getElementById('nonce').value = payload.nonce;
-                    this.paymentInfo = payload;
-                    this.sendOrder()
+                    dropinInstance.requestPaymentMethod((error, payload) => {
+                        if (error) console.error(error);
+                        console.log(payload)
+                        document.getElementById('nonce').value = payload.nonce;
+                        this.paymentInfo = payload;
+                        this.sendOrder()
+                    });
                 });
-            });
         });
     },
 };
 </script>
 
 <template>
+    <AppLoader v-if="pageLoaded" />
     <AppHeader />
     <div class="background-color-page py-3">
         <div class="container">
@@ -144,6 +149,7 @@ export default {
 <style scoped>
 .background-color-page {
     background-color: #ffebe3;
-
+    min-height: 100vh;
+    min-width: 100vw;
 }
 </style>
