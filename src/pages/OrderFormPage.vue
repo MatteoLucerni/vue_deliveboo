@@ -54,7 +54,7 @@ export default {
                 this.formValid = false;
             }
             //tel
-            if (!this.orderData.tel.trim()) {
+            if (!this.orderData.tel) {
             this.errors.telRequired = "tel is required";
             this.formValid = false;
             }
