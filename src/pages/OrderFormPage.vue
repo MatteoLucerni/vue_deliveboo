@@ -58,7 +58,7 @@ export default {
             this.errors.telRequired = "tel is required";
             this.formValid = false;
             }
-            if (isNaN(this.orderData.tel.trim())) {
+            if (isNaN(this.orderData.tel)) {
             this.errors.telInvalid = "tel is invalid";
             this.formValid = false;
             }
