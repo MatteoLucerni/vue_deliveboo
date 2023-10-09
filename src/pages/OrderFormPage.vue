@@ -93,38 +93,36 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="py-3 bg-white ">
-        <div class="container">
-            <h2 class="py-3">Complete Your Order</h2>
-        </div>
-    </div>
+    <video autoplay muted preload="auto" class="object-fit-contain">
+        <source src="../../public/complete-order.mp4" type="video/mp4">
+    </video>
     <div class="py-4">
         <div class="container">
             <div class="restaurant-card p-5">
 
                 <form id="payment-form" method="POST">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <label for="order-name" class="form-label">Name *</label>
                             <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
                                 placeholder="Insert your name">
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <label for="order-surname" class="form-label">Surname *</label>
                             <input required v-model="orderData.surname" id="order-surname" class="form-control" type="text"
                                 placeholder="Insert your surname">
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <label for="order-email" class="form-label">Mail *</label>
                             <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
                                 placeholder="Insert your email">
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <label for="order-tel" class="form-label">Phone *</label>
                             <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
                                 type="number" class="form-control" placeholder="Insert your phone">
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-2">
                             <label for="order-address" class="form-label">Address *</label>
                             <input required v-model="orderData.address" id="order-address" type="text" class="form-control"
                                 placeholder="Insert your address">

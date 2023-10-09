@@ -42,7 +42,7 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="background-color-page pb-5">
+    <div class="pb-5">
         <video autoplay muted preload="auto" class="object-fit-contain">
             <source src="../../public/order.mp4" type="video/mp4">
         </video>
