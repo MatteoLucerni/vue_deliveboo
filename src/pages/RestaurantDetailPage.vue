@@ -70,9 +70,9 @@ export default {
     },
 
     computed: {
-    visiblePlates() {
-      return this.plates.filter(plate => plate.is_visible);
-    }
+        visiblePlates() {
+            return this.plates.filter(plate => plate.is_visible);
+        }
     },
 
     created() {
@@ -91,7 +91,7 @@ export default {
 <template>
     <AppLoader v-if="isLoading" />
     <AppHeader ref="header" />
-    <div class="background-color-page py-3">
+    <div class="background-color-page">
         <div class="container">
             <!-- Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -106,28 +106,17 @@ export default {
                                 create a new cart in this new restaurant?</p>
                         </div>
                         <div class="modal-footer">
-                            <button id="confirm-button" type="button" class="btn btn-warning"
+                            <button id="confirm-button" type="button" class="btn button-warning-db"
                                 data-bs-dismiss="modal">Discard items in the
                                 cart</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn button-secondary-db" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- BACK BUTTON -->
-            <button @click="$router.push({ name: 'home' })"
-                class="button-main-db mt-2 mb-4 d-flex  justify-content-center align-items-center">
-                <div>
-                    <strong><i class="fa-solid fa-arrow-left"></i></strong>
-                </div>
-                <div>
-                    <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
-                </div>
-            </button>
-
             <!-- RESTAURANT -->
-            <div class="restaurant-card p-3">
+            <div class="restaurant-card p-3 mt-3">
                 <div class="row">
 
                     <!-- restaurant name -->
@@ -153,9 +142,11 @@ export default {
 
                 </div>
             </div>
+        </div>
+        <!-- MENU -->
+        <div class="card-layout mt-4 p-3">
+            <div class="container">
 
-            <!-- MENU -->
-            <div class="restaurant-card my-4 p-3">
                 <h1 class="mb-4 fw-bolder text-center">Menù</h1>
                 <div class="row g-3">
                     <div v-if="plates.length" v-for="plate in visiblePlates" :key="plate.id"
@@ -182,19 +173,21 @@ export default {
                     </div>
                     <div class="text-danger text-center fs-2" v-else>No dishes available</div>
                 </div>
+                <!-- BACK BUTTON -->
+        
+                    <button @click="$router.push({ name: 'home' })"
+                        class="button-main-db mt-4 mb-2 d-flex  justify-content-center align-items-center">
+                        <div>
+                            <strong><i class="fa-solid fa-arrow-left"></i></strong>
+                        </div>
+                        <div>
+                            <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
+                        </div>
+                    </button>
             </div>
-
-            <!-- BACK BUTTON -->
-            <button @click="$router.push({ name: 'home' })"
-                class="button-main-db mt-4 mb-2 d-flex  justify-content-center align-items-center">
-                <div>
-                    <strong><i class="fa-solid fa-arrow-left"></i></strong>
-                </div>
-                <div>
-                    <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
-                </div>
-            </button>
         </div>
+
+
     </div>
 </template>
     
