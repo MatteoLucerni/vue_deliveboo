@@ -91,7 +91,7 @@ export default {
 <template>
     <AppLoader v-if="isLoading" />
     <AppHeader ref="header" />
-    <div class="background-color-page">
+    <div class="background-color-page pt-4">
         <div class="container">
             <!-- Modal -->
             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -116,7 +116,7 @@ export default {
             </div>
 
             <!-- RESTAURANT -->
-            <div class="restaurant-card p-3 mt-3">
+            <div class="restaurant-card p-3 ">
                 <div class="row">
 
                     <!-- restaurant name -->
@@ -174,16 +174,16 @@ export default {
                     <div class="text-danger text-center fs-2" v-else>No dishes available</div>
                 </div>
                 <!-- BACK BUTTON -->
-        
-                    <button @click="$router.push({ name: 'home' })"
-                        class="button-main-db mt-4 mb-2 d-flex  justify-content-center align-items-center">
-                        <div>
-                            <strong><i class="fa-solid fa-arrow-left"></i></strong>
-                        </div>
-                        <div>
-                            <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
-                        </div>
-                    </button>
+
+                <button @click="$router.push({ name: 'home' })"
+                    class="button-main-db mt-4 mb-2 d-flex  justify-content-center align-items-center">
+                    <div>
+                        <strong><i class="fa-solid fa-arrow-left"></i></strong>
+                    </div>
+                    <div>
+                        <strong><span class="d-none d-lg-block ms-2">Back</span></strong>
+                    </div>
+                </button>
             </div>
         </div>
 
