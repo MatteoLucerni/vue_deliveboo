@@ -217,7 +217,4 @@ export default {
 
 }
 
-.card-layout {
-    background-color: #ffebe3;
-}
 </style>
