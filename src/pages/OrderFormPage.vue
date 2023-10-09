@@ -20,7 +20,7 @@ export default {
                 note: '',
             },
             errors: {},
-            formValid : true,
+            formValid: true,
             endpoint: 'http://127.0.0.1:8000/api/orders',
             paymentInfo: null,
             pageLoaded: true,
@@ -33,18 +33,18 @@ export default {
             return regex.test(email);
         },
         //validation for form
-        validateForm(){
-            this.errors = {};   
+        validateForm() {
+            this.errors = {};
             this.formValid = true;
             //name
             if (!this.orderData.name.trim()) {
-            this.errors.nameRequired = "Name is required";
-            this.formValid = false;
+                this.errors.nameRequired = "Name is required";
+                this.formValid = false;
             }
             //surname
             if (!this.orderData.surname.trim()) {
-            this.errors.surnameRequired = "Surname is required";
-            this.formValid = false;
+                this.errors.surnameRequired = "Surname is required";
+                this.formValid = false;
             }
             //email
             if (!this.orderData.email.trim()) {
@@ -56,24 +56,24 @@ export default {
             }
             //tel
             if (!this.orderData.tel) {
-            this.errors.telRequired = "tel is required";
-            this.formValid = false;
+                this.errors.telRequired = "tel is required";
+                this.formValid = false;
             }
             if (isNaN(this.orderData.tel)) {
-            this.errors.telInvalid = "tel is invalid";
-            this.formValid = false;
+                this.errors.telInvalid = "tel is invalid";
+                this.formValid = false;
             }
             //address
             if (!this.orderData.address.trim()) {
-            this.errors.addressRequired = "Address is required";
-            this.formValid = false;
+                this.errors.addressRequired = "Address is required";
+                this.formValid = false;
             }
             return this.formValid
-            
-    },
-    
+
+        },
+
         sendOrder() {
-            if(!this.formValid){
+            if (!this.formValid) {
                 return;
             }
             // Crea un oggetto che contiene sia i dati del carrello che quelli del form
@@ -133,16 +133,16 @@ export default {
                     event.preventDefault();
 
 
-                dropinInstance.requestPaymentMethod((error, payload) => {
-                    if (error) console.error(error);
-                    console.log(payload)
-                    document.getElementById('nonce').value = payload.nonce;
-                    this.paymentInfo = payload;
+                    dropinInstance.requestPaymentMethod((error, payload) => {
+                        if (error) console.error(error);
+                        console.log(payload)
+                        document.getElementById('nonce').value = payload.nonce;
+                        this.paymentInfo = payload;
 
-                    this.sendOrder()
+                        this.sendOrder()
+                    });
+
                 });
-                
-            });
 
         });
     },
@@ -158,7 +158,22 @@ export default {
     <div class="py-4">
         <div class="container">
             <div class="restaurant-card p-5">
-
+                <h2 class="py-2">Order Summary</h2>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Dishes</h5>
+                        <ul class="px-0 pb-3 border-bottom border-dark">
+                            <li v-for="item in this.cartItems" :key="item.id" class="card-text"><strong class="text-order">x
+                                    {{ item.quantity
+                                    }}</strong> {{ item.name }} - <span class="text-success text-size fw-bold">{{ item.price
+}}
+                                    €</span>
+                            </li>
+                        </ul>
+                        <h5 class="mt-3">Total: <strong class="text-success">{{ totalPrice }} €</strong></h5>
+                    </div>
+                </div>
+                <h2 class="py-2">Customer Info and Payment method</h2>
                 <form id="payment-form" method="POST">
                     <div class="row">
                         <div class="col-6 mb-2">
