@@ -98,8 +98,8 @@ export default {
 <template>
     <div class="background-color-page">
 
+        <AppHeader />
         <div class="container-fluid px-0 overflow-x-hidden">
-            <AppHeader />
             <video autoplay muted preload="auto" class="object-fit-contain">
                 <source src="../../public/deliveboo-banner-orange.mp4" type="video/mp4">
             </video>
@@ -196,27 +196,3 @@ export default {
         <AppLoader v-if="isLoading" />
     </div>
 </template>
-
-<style scoped lang="scss">
-.background-color-page {
-
-    background-size: 100% 100%;
-    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-    background-image:
-        radial-gradient(18% 28% at 24% 50%, #F6884A 7%, #073AFF00 100%),
-        radial-gradient(18% 28% at 18% 71%, #FFA07A 6%, #073AFF00 100%),
-        radial-gradient(70% 53% at 36% 76%, #FF8C69 0%, #073AFF00 100%),
-        radial-gradient(42% 53% at 15% 94%, #FF7043 7%, #073AFF00 100%),
-        radial-gradient(42% 53% at 34% 72%, #FF6347 7%, #073AFF00 100%),
-        radial-gradient(18% 28% at 35% 87%, #FF5722 7%, #073AFF00 100%),
-        radial-gradient(31% 43% at 7% 98%, #ff5100 10%, #073AFF00 100%),
-        radial-gradient(21% 37% at 72% 23%, #FF8C00 10%, #073AFF00 100%),
-        radial-gradient(35% 56% at 91% 74%, #FFA07A 9%, #073AFF00 100%),
-        radial-gradient(74% 86% at 70% 55%, #F6884A 24%, #073AFF00 100%),
-        linear-gradient(135deg, #f9933a 0%, #fb6c41 30%, #fea750 30%, #fdcd80 40%, #ffa07a 40%, #ffa07a 50%, #ff8c69 50%, #ff8c69 60%, #ff7043 60%, #ff7043 70%, #ff5722 70%, #ff5722 80%, #ff4500 80%, #ff4500 100%),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
-
-
-}
-
-</style>
