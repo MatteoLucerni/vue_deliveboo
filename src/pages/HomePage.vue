@@ -180,7 +180,7 @@ export default {
                             </li>
                             <!-- Pagination -->
                             <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
-                                <ul class="pagination justify-content-end mb-3">
+                                <ul class="pagination justify-content-end mb-3 custom-pagination">
                                     <li class="page-item" v-for="link in restaurants.links"
                                         :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
                                         <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
@@ -218,4 +218,5 @@ export default {
 
 
 }
+
 </style>

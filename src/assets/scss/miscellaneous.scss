@@ -91,3 +91,29 @@ video {
 .text-size{
   font-size: 1.1rem;
 }
+
+.custom-pagination .page-link {
+  border-color: $primary-color;
+  color: $primary-color;
+}
+
+.custom-pagination .page-item.active .page-link {
+  background-color: darkorange;
+  color: white;
+  border-color: darkorange;
+}
+
+.custom-pagination .page-link:hover {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: white;
+}
+.custom-pagination .page-item.disabled .page-link {
+  background-color: lighten($primary-color, 28%);
+}
+
+
+
+
+
+
