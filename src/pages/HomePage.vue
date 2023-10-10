@@ -179,7 +179,7 @@ export default {
                                 <h3>No restaurants, try changing filters</h3>
                             </li>
                             <!-- Pagination -->
-                            <nav class="custom-nav" v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
+                            <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
                                 <ul class="pagination justify-content-end mb-3 custom-pagination">
                                     <li class="page-item" v-for="link in restaurants.links"
                                         :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
