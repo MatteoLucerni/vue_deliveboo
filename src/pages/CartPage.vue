@@ -55,8 +55,8 @@ export default {
 </script>
 
 <template>
+    <AppHeader ref="header" />
     <div class="container-fluid px-0 overflow-x-hidden">
-        <AppHeader ref="header" />
         <div class="bg-white pb-5">
             <video autoplay muted preload="auto" class="object-fit-contain">
                 <source src="../../public/cart.mp4" type="video/mp4">
