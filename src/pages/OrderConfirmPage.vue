@@ -51,13 +51,15 @@ export default {
                 <div class="restaurant-card p-5">
                     <h1 class="text-success py-3">Thanks! Your order has been placed correctly</h1>
                     <div class="card-body">
-                        <h5 class="card-title mb-5">
+                        <h5 class="card-title mb-3">
                             Order Summary:</h5>
-                        <ul>
-                            <li class="card-text" v-for="item in cartItems" :key="item.id">
-                                <p>{{ item.name }} - {{ item.price }} € - {{ item.quantity }} quantity</p>
+                        <ul class="px-0 pb-3 border-bottom border-dark">
+                            <li v-for="item in this.cartItems" :key="item.id" class="card-text">
+                                <strong class="text-order">x {{ item.quantity }}</strong> {{ item.name }} -
+                                <span class="text-success text-size fw-bold">{{ item.price }} €</span>
                             </li>
                         </ul>
+                        <h5 class="mt-3">Total: <strong class="text-success">{{ totalPrice }} €</strong></h5>
                         <div class="d-flex justify-content-end">
                             <RouterLink @click="emptyCart" :to="{ name: 'home' }" class="btn button-main-db">Return to home
                             </RouterLink>
