@@ -62,7 +62,8 @@ export default {
                 <RouterLink :to="{ name: 'cart' }">
                     <button type="button" class="btn bg-cart position-relative">
                         <i class="fa-solid fa-cart-shopping cart"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span v-if="totalQuantity"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ totalQuantity }}
                         </span>
                     </button>
