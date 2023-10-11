@@ -129,7 +129,7 @@ export default {
                         </div>
                         <!-- "Show More" button -->
                         <div class="text-center">
-                            <button @click="showAllTypes = !showAllTypes" class="button-main-db">
+                            <button @click="showAllTypes = !showAllTypes" class="button-main-db mt-2">
                                 {{ showAllTypes ? 'Show None' : 'Show All' }}
                             </button>
                         </div>
