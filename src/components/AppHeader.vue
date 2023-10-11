@@ -41,7 +41,7 @@ export default {
         <div class="container-fluid d-flex align-items-center ">
             <a class="navbar-brand d-flex align-items-center " href="#">
                 <img src="../../public/Yummy_Food.svg" alt="Logo" width="50" height="50"
-                    class="d-inline-block align-text-top rounded-5 mx-4">
+                    class="d-inline-block align-text-top rounded-5 mx-2">
                 DeliveBoo
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
