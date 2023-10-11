@@ -28,7 +28,7 @@ const router = createRouter({
       component: OrderConfirmPage,
     },
     { path: '/not-found', name: 'not-found', component: NotFoundPage },
-    // { path: "/:pathMatch(.*)*", redirect: "/not-found" },
+    { path: '/:pathMatch(.*)*', redirect: '/not-found' },
   ],
 });
 

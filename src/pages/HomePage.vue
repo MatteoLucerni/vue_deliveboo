@@ -77,19 +77,16 @@ export default {
         this.fetchrestaurants();
     },
     mounted() {
-        // Get a reference to the video element
-        const videoElement = document.querySelector('video'); // You can use a more specific selector if needed
+        const videoElement = document.querySelector('video');
 
-        // Function to play the video after a 2-second delay
         const playVideoDelayed = () => {
             setTimeout(() => {
                 if (videoElement && videoElement.paused) {
                     videoElement.play();
                 }
-            }, 1000); // 2000 milliseconds (2 seconds)
+            }, 1000);
         };
 
-        // Call the playVideoDelayed function after the component has mounted
         playVideoDelayed();
     },
 };
