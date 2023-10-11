@@ -179,7 +179,7 @@ export default {
                     <h2 class="py-2">Customer Info and Payment method</h2>
                     <form id="payment-form" method="POST">
                         <div class="row">
-                            <div class="col-6 col-12-md mb-2">
+                            <div class="col-md-6 col-12-md mb-2">
                                 <label for="order-name" class="form-label">Name *</label>
                                 <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
                                     placeholder="Insert your name">
