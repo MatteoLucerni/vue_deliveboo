@@ -42,7 +42,7 @@ export default {
             <a class="navbar-brand d-flex align-items-center " href="#">
                 <img src="../../public/Yummy_Food.svg" alt="Logo" width="50" height="50"
                     class="d-inline-block align-text-top rounded-5 mx-4">
-                DeliveBoo
+                <strong>DeliveBoo</strong>
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -52,8 +52,8 @@ export default {
                         </RouterLink>
                     </li>
                     <li>
-                        <a class="nav-link owner" href="http://127.0.0.1:8000/">I am a restaurant owner <i
-                                class="redirect-icon fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                        <a class="nav-link owner" href="http://127.0.0.1:8000/"><strong>I am a restaurant owner <i
+                                    class="redirect-icon fa-solid fa-arrow-up-right-from-square ms-1"></i></strong></a>
                     </li>
                 </ul>
             </div>
