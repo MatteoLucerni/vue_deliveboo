@@ -127,7 +127,7 @@ export default {
                         <!-- "Show More" button -->
                         <div class="text-center">
                             <button @click="showAllTypes = !showAllTypes" class="button-main-db mt-2">
-                                {{ showAllTypes ? 'Hide' : 'Show' }}
+                                {{ showAllTypes ? 'Hide' : 'Show type filters' }}
                             </button>
                         </div>
                         <!-- Filter by keyword -->
