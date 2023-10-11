@@ -55,8 +55,8 @@ export default {
 </script>
 
 <template>
+    <AppHeader ref="header" />
     <div class="container-fluid px-0 overflow-x-hidden">
-        <AppHeader ref="header" />
         <div class="bg-white pb-5">
             <video autoplay muted preload="auto" class="object-fit-contain">
                 <source src="../../public/cart.mp4" type="video/mp4">
@@ -92,8 +92,17 @@ export default {
                 </div>
 
                 <div class="my-4">
-                    <h3 v-if="!cartItems.length" class="text-danger text-center fw-bold">Cart is empty</h3>
-
+                    <div v-if="!cartItems.length">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="text-danger text-center fw-bold">Cart is empty</h3>
+                            </div>
+                            <div class="col-12 mt-4 d-lg-none d-flex align-items-center justify-content-center">
+                                <!-- RETURN BUTTON -->
+                                <RouterLink :to="{ name: 'home' }" class="button-main-db">Return to home</RouterLink>
+                            </div>
+                        </div>
+                    </div>
                     <div v-else class="row">
                         <!-- BACK BUTTON -->
                         <div
@@ -112,13 +121,10 @@ export default {
                             <div class="fs-5">Total price: {{
                                 totalPrice }} €</div>
                         </div>
-
                         <div
-                            class="  col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end justify-content-xl-end ">
-
+                            class="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end justify-content-xl-end">
                             <!-- CONFIRM BUTTON -->
-                            <RouterLink :to="{ name: 'order-form' }" class="button-main-db">Confirm
-                            </RouterLink>
+                            <RouterLink :to="{ name: 'order-form' }" class="button-main-db">Confirm</RouterLink>
                         </div>
                     </div>
                 </div>

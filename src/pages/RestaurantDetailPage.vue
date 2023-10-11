@@ -156,7 +156,7 @@ export default {
                             <!-- dish image -->
                             <div @click="addToCart(plate), updateHeader()"
                                 class=" img-fluid ratio ratio-4x3 mb-4 img-hover">
-                                <img class="rounded-4" :src="storage_path + plate.image" :alt="plate.name">
+                                <img class="rounded-4 object-fit-cover" :src="storage_path + plate.image" :alt="plate.name">
                                 <button class="button-cart-db rounded-4"><i
                                         class="fa-solid fa-cart-shopping text-dark back-icon"></i></button>
                             </div>

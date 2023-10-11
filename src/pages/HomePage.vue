@@ -77,19 +77,16 @@ export default {
         this.fetchrestaurants();
     },
     mounted() {
-        // Get a reference to the video element
-        const videoElement = document.querySelector('video'); // You can use a more specific selector if needed
+        const videoElement = document.querySelector('video');
 
-        // Function to play the video after a 2-second delay
         const playVideoDelayed = () => {
             setTimeout(() => {
                 if (videoElement && videoElement.paused) {
                     videoElement.play();
                 }
-            }, 1000); // 2000 milliseconds (2 seconds)
+            }, 1000);
         };
 
-        // Call the playVideoDelayed function after the component has mounted
         playVideoDelayed();
     },
 };
@@ -98,8 +95,8 @@ export default {
 <template>
     <div class="background-color-page">
 
+        <AppHeader />
         <div class="container-fluid px-0 overflow-x-hidden">
-            <AppHeader />
             <video autoplay muted preload="auto" class="object-fit-contain">
                 <source src="../../public/deliveboo-banner-orange.mp4" type="video/mp4">
             </video>
@@ -115,11 +112,11 @@ export default {
                     <!-- Filters -->
                     <div class="filter-container filter-card d-flex flex-column p-4 mb-5">
                         <!-- Filter by type -->
-                        <h5 class="text-center">Filter by type</h5>
+                        <h5 class="text-center">Search By Type</h5>
                         <br>
                         <div class="buttons d-flex flex-wrap">
                             <div v-for="(rType, index) in filteredTypes" :key="rType.name"
-                                :class="['form-check', index >= 4 && !showAllTypes ? 'd-none' : '', 'mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3 my-2']">
+                                :class="['form-check', index >= 0 && !showAllTypes ? 'd-none' : '', 'mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3 my-2']">
                                 <input @change="sendFilters()" v-model="selectedFilters" :value="rType.name"
                                     class="form-check-input ms-2" type="checkbox" :id="rType.name">
                                 <label class="form-check-label ms-2" :for="rType.name">
@@ -128,17 +125,17 @@ export default {
                             </div>
                         </div>
                         <!-- "Show More" button -->
-                        <div class="text-center mt-4">
-                            <button @click="showAllTypes = !showAllTypes" class="button-main-db">
-                                {{ showAllTypes ? 'Show Less' : 'Show More' }}
+                        <div class="text-center">
+                            <button @click="showAllTypes = !showAllTypes" class="button-main-db mt-2">
+                                {{ showAllTypes ? 'Hide' : 'Show type filters' }}
                             </button>
                         </div>
                         <!-- Filter by keyword -->
-                        <h5 class="my-3 text-center pt-4">Search restaurant</h5>
+                        <h5 class="my-3 text-center pt-4">Search By Name</h5>
                         <input v-model="keywordFilter" class="form-control me-2" type="search" placeholder="Search"
                             aria-label="Search">
                         <div class="text-center mt-4">
-                            <button @click="sendFilters()" class="button-main-db w-25">Filter</button>
+                            <button @click="sendFilters()" class="button-main-db">Filter</button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +177,7 @@ export default {
                             </li>
                             <!-- Pagination -->
                             <nav v-if="restaurants.data.length" aria-label="Page navigation example mb-5">
-                                <ul class="pagination justify-content-end mb-3">
+                                <ul class="pagination justify-content-end mb-3 custom-pagination">
                                     <li class="page-item" v-for="link in restaurants.links"
                                         :class="[{ active: link.active }, { disabled: !link.url }]" :key="link.label">
                                         <button type="button" :disabled="!link.url" class="page-link" v-html="link.label"
@@ -196,26 +193,3 @@ export default {
         <AppLoader v-if="isLoading" />
     </div>
 </template>
-
-<style scoped lang="scss">
-.background-color-page {
-
-    background-size: 100% 100%;
-    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-    background-image:
-        radial-gradient(18% 28% at 24% 50%, #F6884A 7%, #073AFF00 100%),
-        radial-gradient(18% 28% at 18% 71%, #FFA07A 6%, #073AFF00 100%),
-        radial-gradient(70% 53% at 36% 76%, #FF8C69 0%, #073AFF00 100%),
-        radial-gradient(42% 53% at 15% 94%, #FF7043 7%, #073AFF00 100%),
-        radial-gradient(42% 53% at 34% 72%, #FF6347 7%, #073AFF00 100%),
-        radial-gradient(18% 28% at 35% 87%, #FF5722 7%, #073AFF00 100%),
-        radial-gradient(31% 43% at 7% 98%, #ff5100 10%, #073AFF00 100%),
-        radial-gradient(21% 37% at 72% 23%, #FF8C00 10%, #073AFF00 100%),
-        radial-gradient(35% 56% at 91% 74%, #FFA07A 9%, #073AFF00 100%),
-        radial-gradient(74% 86% at 70% 55%, #F6884A 24%, #073AFF00 100%),
-        linear-gradient(135deg, #f9933a 0%, #fb6c41 30%, #fea750 30%, #fdcd80 40%, #ffa07a 40%, #ffa07a 50%, #ff8c69 50%, #ff8c69 60%, #ff7043 60%, #ff7043 70%, #ff5722 70%, #ff5722 80%, #ff4500 80%, #ff4500 100%),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
-
-
-}
-</style>
