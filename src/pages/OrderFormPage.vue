@@ -179,22 +179,22 @@ export default {
                     <h2 class="py-2">Customer Info and Payment method</h2>
                     <form id="payment-form" method="POST">
                         <div class="row">
-                            <div class="col-6 mb-2">
+                            <div class="col-6 col-12-md mb-2">
                                 <label for="order-name" class="form-label">Name *</label>
                                 <input required v-model="orderData.name" id="order-name" class="form-control" type="text"
                                     placeholder="Insert your name">
                             </div>
-                            <div class="col-6 mb-2">
+                            <div class="col-md-6 col-12 mb-2">
                                 <label for="order-surname" class="form-label">Surname *</label>
                                 <input required v-model="orderData.surname" id="order-surname" class="form-control"
                                     type="text" placeholder="Insert your surname">
                             </div>
-                            <div class="col-6 mb-2">
+                            <div class="col-md-6 col-12-sm mb-2">
                                 <label for="order-email" class="form-label">Mail *</label>
                                 <input required v-model="orderData.email" id="order-email" class="form-control" type="email"
                                     placeholder="Insert your email">
                             </div>
-                            <div class="col-6 mb-2">
+                            <div class="col-md-6 col-12-sm mb-2">
                                 <label for="order-tel" class="form-label">Phone *</label>
                                 <input required min="1000000000" max="9999999999" v-model="orderData.tel" id="order-tel"
                                     type="number" class="form-control" placeholder="Insert your phone">
