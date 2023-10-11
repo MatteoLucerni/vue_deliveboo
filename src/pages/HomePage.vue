@@ -112,11 +112,11 @@ export default {
                     <!-- Filters -->
                     <div class="filter-container filter-card d-flex flex-column p-4 mb-5">
                         <!-- Filter by type -->
-                        <h5 class="text-center">Filter by type</h5>
+                        <h5 class="text-center">Search By Type</h5>
                         <br>
                         <div class="buttons d-flex flex-wrap">
                             <div v-for="(rType, index) in filteredTypes" :key="rType.name"
-                                :class="['form-check', index >= 4 && !showAllTypes ? 'd-none' : '', 'mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3 my-2']">
+                                :class="['form-check', index >= 0 && !showAllTypes ? 'd-none' : '', 'mx-2 badge rounded-pill text-dark border d-flex align-items-center pb-2 pe-3 my-2']">
                                 <input @change="sendFilters()" v-model="selectedFilters" :value="rType.name"
                                     class="form-check-input ms-2" type="checkbox" :id="rType.name">
                                 <label class="form-check-label ms-2" :for="rType.name">
@@ -125,17 +125,17 @@ export default {
                             </div>
                         </div>
                         <!-- "Show More" button -->
-                        <div class="text-center mt-4">
-                            <button @click="showAllTypes = !showAllTypes" class="button-main-db">
-                                {{ showAllTypes ? 'Show Less' : 'Show More' }}
+                        <div class="text-center">
+                            <button @click="showAllTypes = !showAllTypes" class="button-main-db mt-2">
+                                {{ showAllTypes ? 'Hide' : 'Show' }}
                             </button>
                         </div>
                         <!-- Filter by keyword -->
-                        <h5 class="my-3 text-center pt-4">Search restaurant</h5>
+                        <h5 class="my-3 text-center pt-4">Search By Name</h5>
                         <input v-model="keywordFilter" class="form-control me-2" type="search" placeholder="Search"
                             aria-label="Search">
                         <div class="text-center mt-4">
-                            <button @click="sendFilters()" class="button-main-db w-25">Filter</button>
+                            <button @click="sendFilters()" class="button-main-db">Filter</button>
                         </div>
                     </div>
                 </div>
